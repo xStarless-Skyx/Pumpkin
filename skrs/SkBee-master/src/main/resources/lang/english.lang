@@ -1,0 +1,97 @@
+version: $version
+
+types:
+    advancement: advancement¦s
+    advancementpro: advancement progress¦es
+    armortrim: armor trim¦s
+    attributemodifier: attribute modifier¦s
+    attributeoperation: attribute operation¦s
+    audience: audience¦s
+    blockaction: block action¦s
+    blockface: blockface¦s
+    blockstate: blockstate¦s
+    bossbar: boss bars¦s
+    bossbarcolor: boss bar color¦s
+    bossbarflag: boss bar flags¦s
+    bossbarstyle: boss bar style¦s
+    bound: bound
+    bukkitcolor: bukkit col(or|our)¦s
+    bukkittreetype: bukkit tree type¦s
+    chunkloadlevel: chunk load level¦s
+    consumeeffect: consume effect¦s
+    criteria: criteria¦s
+    damagesource: damage source¦s
+    damagetype: damage type¦s
+    datacomponenttype: data component type¦s
+    displaybillboard: display billboard¦s
+    displaybrightness: display brightness¦es
+    displayslot: display slot¦s
+    dustoption: dust option¦s @-
+    dusttransition: dust transition¦s @-
+    entityeffect: entity effect¦s
+    entityremovecause: entity remove cause¦s
+    environment: environment type¦s @an
+    equipmentslot: equipment slot¦s
+    equipmentslotgroup: equipment slot group¦s
+    failmovereason: fail move reason¦s
+    fishingstate: fishing state¦s
+    fishhookstate: fish hook state¦s
+    gameevent: game event¦s
+    instrument: instrument¦s
+    itemdisplaytransform: item display transform¦s
+    itemflag: item flag¦s
+    jukeboxsong: jukebox song¦s
+    loottable: loot table¦s
+    machine: machine¦s
+    machineproperty: machine propert¦y¦ies
+    memory: memor¦y¦ies
+    merchant: merchant¦s
+    merchantinventory: merchant inventor¦y¦ies
+    merchantrecipe: merchant recipe¦s
+    minecraftentitytype: minecraft entity type¦s
+    minecrafttag: minecraft tag¦s
+    mirror: mirror¦s
+    namespacedkey: namespacedkey¦s
+    nbtcompound: nbt compound¦s @an
+    nbttype: nbt type¦s @an
+    objective: objective¦s
+    particle: particle¦s @-
+    particlespell: particle spell¦s @-
+    playerspawnchangereason: player spawn change reason¦s
+    pose: pose¦s
+    potioneffectcause: potion effect cause¦s
+    potiontype: potion type¦s
+    profession: profession¦s
+    property: propert¦y¦ies
+    quaternion: quaternion¦s
+    quitreason: quit reason¦s
+    raytraceresult: raytraceresult¦s
+    recipechoice: recipe choice¦s
+    recipetype: recipe type¦s
+    registrykey: registry key¦s
+    rendertype: render type¦s
+    respawnreason: respawn reason¦s
+    spell: spell¦s
+    scoreboard: scoreboard¦s
+    signedmessage: signed message¦s
+    statistic: statistic¦s
+    structure: structure¦s
+    structurerotation: structure rotation¦s
+    tagresolver: tag resolver¦s
+    tagkey: tag key¦s
+    team: team¦s
+    teamoption: team options¦s
+    teamoptionstatus: team option status¦es
+    textalignment: text alignment¦s
+    textcomponent: text component¦s @-
+    trail: trail¦s
+    transformation: transformation¦s
+    transformreason: transform reason¦s
+    trimmaterial: trim material¦s
+    trimpattern: trim pattern¦s
+    typedkey: typed key¦s
+    vibration: vibration¦s @-
+    villagertype: villager type¦s
+    worldborder: world border¦s
+    worldcreator: world creator
+    worldtype: world type¦s @-

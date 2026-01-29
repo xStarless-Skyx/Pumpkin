@@ -1,0 +1,2926 @@
+# Default language file for non-translatable entries
+
+# Which version of Skript this language file was written for
+version: @version@
+
+# -- General --
+and: and
+or: or
+a: a, an
+is: is
+are: are
+not: not
+# not a: not a(n) # @a:not a @an:not an @x:not
+neither: neither
+nor: nor
+of: of
+
+genders:
+	0:
+		id: a
+		definite article: the
+		indefinite article: a
+	1:
+		id: an
+		definite article: the
+		indefinite article: an
+	plural:
+		# id: x
+		definite article: the
+		# indefinite article: #-#
+	# none:
+		# id: -
+		# definite article: #-#
+		# indefinite article: #-#
+	# nominative:
+		# id: +
+		# used for adjectives only
+
+# -- Aliases --
+aliases:
+	# regexes for Skript
+	any: any:
+	every: (?:every|all)
+	of every: of (?:every|all)
+	of: of(?: any)?
+
+	named: named
+
+# -- Enchantments --
+enchantments:
+	protection: Protection
+	fire_protection: Fire Protection
+	feather_falling: Feather Falling
+	blast_protection: Blast Protection
+	projectile_protection: Projectile Protection
+	respiration: Respiration
+	aqua_affinity: Aqua Affinity
+	sharpness: Sharpness
+	smite: Smite
+	bane_of_arthropods: Bane of Arthropods
+	knockback: Knockback
+	fire_aspect: Fire Aspect
+	looting: Looting
+	efficiency: Efficiency
+	silk_touch: Silk Touch
+	unbreaking: Unbreaking
+	fortune: Fortune
+	power: Power
+	punch: Punch
+	flame: Flame
+	infinity: Infinity
+	thorns: Thorns
+	luck: Luck of the Sea
+	lure: Lure
+	depth_strider: Depth Strider
+	mending: Mending
+	frost_walker: Frost Walker
+	vanishing_curse: Curse of Vanishing
+	binding_curse: Curse of Binding
+	# It's sweeping on 1.10 and below for some reason.
+	sweeping: Sweeping Edge
+	sweeping_edge: Sweeping Edge
+	# New 1.13 Enchantments
+	channeling: Channeling, Channelling
+	riptide: Riptide
+	impaling: Impaling
+	loyalty: Loyalty
+	luck_of_the_sea: Luck of The Sea
+	# new 1.14 Enchantments
+	multishot: Multishot, Multi-Shot
+	piercing: Piercing
+	quick_charge: Quick Charge
+	# new 1.16 Enchantment
+	soul_speed: Soul Speed
+	# new 1.19 Enchantment
+	swift_sneak: Swift Sneak
+	# new 1.21 Enchantments (added in 1.20.5 experimental)
+	density: Density
+	breach: Breach
+	wind_burst: Wind Burst
+
+# -- Potion Effect Types --
+potion effect types:
+	speed: speed, swiftness
+	slowness: slowness, slow
+	haste: haste, fast digging, fast mining
+	mining_fatigue: mining fatigue, slow digging, slow mining
+	strength: strength, increase damage, increased damage
+	instant_health: instant health, health
+	instant_damage: instant damage, damage
+	jump_boost: jump boost, jump
+	nausea: nausea, confusion
+	regeneration: regeneration
+	resistance: resistance, damage resistance
+	fire_resistance: fire resistance, fire immunity
+	water_breathing: water breathing
+	invisibility: invisibility
+	blindness: blindness
+	night_vision: night vision
+	hunger: hunger
+	weakness: weakness, reduce damage, reduced damage
+	poison: poison
+	wither: wither, wither effect, wither potion effect
+	health_boost: health boost, max health boost, maximum health boost
+	absorption: absorption
+	saturation: saturation
+	luck: luck
+	unluck: bad luck, unluck
+	levitation: levitation, floating
+	glowing: glowing
+
+	# 1.13 potion effect types
+	slow_falling: slow falling, slow fall
+	dolphins_grace: dolphins grace, dolphin's grace
+	conduit_power: conduit power
+
+	# 1.14 potion effect types
+	bad_omen: bad omen
+	hero_of_the_village: hero of the village
+
+	# 1.19 potion effect types
+	darkness: darkness
+
+	# 1.21 potion effect types (added in 1.20.5 experimental)
+	wind_charged: wind charged
+	raid_omen: raid omen
+	infested: infested
+	weaving: weaving
+	trial_omen: trial omen
+	oozing: oozing
+
+potion effect type categories:
+	beneficial: beneficial
+	harmful: harmful
+	neutral: neutral
+
+# -- Weather --
+weather:
+	clear:
+		name: clear, sun, sunny
+		adjective: sunny
+	rain:
+		name: rain, rainy, raining
+		adjective: rainy
+	thunder:
+		name: thunder, thundering, thunderstorm
+		adjective: thundering
+
+# -- Biomes --
+biomes:
+	swamp: swampland, swamp, marsh
+	swamp_hills: swamp hills
+	forest: forest
+	taiga: taiga
+	desert: desert
+	plains: plains
+	nether: hell, nether
+	the_end: sky, the end
+	ocean: ocean, sea
+	river: river
+	mountains: extreme hills, mountains
+	frozen_ocean: frozen ocean
+	frozen_river: frozen river
+	snowy_tundra: ice plains, snowy tundra
+	snowy_mountains: ice mountains, snowy mountains
+	mushroom_fields: mushroom island, mushroom fields
+	mushroom_field_shore: mushroom shore, mushroom island shore, mushroom fields shore
+	beach: beach
+	desert_hills: desert hills
+	wooded_hills: forest hills, wooded hills
+	taiga_hills: taiga hills
+	mountain_edge: small mountains, hills, mountain edge
+	jungle: jungle
+	jungle_hills: jungle hills
+	jungle_edge: jungle edge
+	deep_ocean: deep ocean
+	stone_shore: stone beach, stone shore
+	snowy_beach: cold beach, snowy beach
+	birch_forest: birch forest
+	birch_forest_hills: birch forest hills
+	dark_forest: roofed forest, black forest, dark forest
+	snowy_taiga: cold taiga, snowy taiga
+	snowy_taiga_hills: cold taiga hills, snowy taiga hills
+	giant_tree_taiga: mega taiga, giant tree taiga, redwood taiga
+	giant_tree_taiga_hills: mega taiga hills, giant tree taiga hills, redwood taiga hills
+	wooded_mountains: extreme hills plus, mountains with trees, wooded mountains
+	savanna: savanna
+	savanna_plateau: savanna plateau
+	badlands: mesa, badlands
+	wooded_badlands_plateau: mesa plateau forest, badlands plateau forest, wooded badlands plateau
+	badlands_plateau: mesa plateau, badlands plateau
+	eroded_badlands: eroded badlands, eroded mesa
+	sunflower_plains: sunflower plains
+	desert_lakes: desert lakes
+	flower_forest: flower forest
+	taiga_mountains: taiga mountains
+	swampland_mountains: swampland mountains, swamp hills
+	ice_spikes: ice plains spikes, spiked ice plains, ice plains with spikes, ice spikes
+	modified_jungle: jungle mountains
+	modified_jungle_edge: jungle edge mountains
+	snowy_taiga_mountains: cold taiga mountains, snowy taiga mountains
+	shattered_savanna: savanna mountains, shattered savanna
+	shattered_savanna_plateau: savanna plateau mountains, shattered savanna plateau
+	eroded badlands: bryce, mesa bryce, mesa (bryce), hoodoos, eroded badlands
+	modified_wooded_badlands_plateau: mesa plateau forest mountains, modified wooded badlands plateau, badlands plateau forest mountains
+	modified_badlands_plateau: mesa plateau mountains, badlands plateau mountains, modified badlands plateau
+	tall_birch_forest: birch forest mountains, tall birch forest
+	tall_birch_hills: birch forest hills mountains, tall birch hills
+	dark_forest_hills: roofed forest mountains, dark forest hills
+	giant_spruce_taiga: mega spruce taiga, giant spruce taiga
+	gravelly_mountains: extreme hills mountains, gravelly mountains
+	modified_gravelly_mountains: extreme hills plus mountains, modified gravelly mountains
+	giant_spruce_taiga_hills: mega spruce taiga hills, giant spruce taiga hills
+	the_void: void, the void
+	small_end_islands: small end islands
+	end_midlands: end midlands
+	end_highlands: end highlands
+	end_barrens: end barrens
+	warm_ocean: warm ocean
+	lukewarm_ocean: lukewarm ocean
+	cold_ocean: cold ocean
+	deep_warm_ocean: deep warm ocean
+	deep_lukewarm_ocean: deep lukewarm ocean
+	deep_cold_ocean: deep cold ocean
+	deep_frozen_ocean: deep frozen ocean
+	# 1.14 biomes
+	bamboo_jungle: bamboo jungle
+	bamboo_jungle_hills: bamboo jungle hills
+	# 1.16 biomes
+	nether_wastes: nether wastes, nether, hell
+	crimson_forest: crimson forest
+	soul_sand_valley: soul sand valley
+	warped_forest: warped forest
+	basalt_deltas: basalt deltas
+	custom: custom, unknown
+	# 1.17 biomes
+	dripstone_caves: dripstone caves
+	lush_caves: lush caves
+	# 1.18 biomes
+	meadow: meadow
+	snowy_slopes: snowy slopes
+	jagged_peaks: jagged peaks
+	stony_peaks: stony peaks
+	frozen_peaks: frozen peaks
+	grove: grove
+	old_growth_birch_forest: old growth birch forest, tall birch forest
+	old_growth_pine_taiga: old growth pine taiga, giant tree taiga
+	old_growth_spruce_taiga: old growth spruce taiga, giant spruce taiga
+	snowy_plains: snowy plains, snowy tundra
+	sparse_jungle: sparse jungle, jungle edge
+	stony_shore: stony shore, stone shore
+	windswept_hills: windswept hills, mountains
+	windswept_forest: windswept forest, wooded mountains
+	windswept_gravelly_hills: windswept gravelly hills, gravelly mountains
+	windswept_savanna: windswept savanna, shattered savanna
+	wooded_badlands: wooded badlands, wooded mesa, mesa forest, badlands forest
+	# 1.19 biomes
+	mangrove_swamp: mangrove swamp
+	deep_dark: deep dark
+	# 1.19.4
+	cherry_grove: cherry grove
+	# 1.21.3
+	pale_garden: pale garden
+
+# -- Tree Types --
+tree types:
+	tree:
+		name: tree¦s
+		pattern: (any )?trees?
+	regular:
+		name: oak¦s
+		pattern: (any )?(regular|normal|oak)( tree)?s?
+	small_regular:
+		name: small oak¦s
+		pattern: small (regular|normal|oak)( tree)?s?
+	big_regular:
+		name: big tree¦s
+		pattern: (big|large) (regular|normal|oak)( tree)?s?
+	redwood:
+		name: redwood¦s
+		pattern: (any )?(fir|pine|spruce|redwood)( tree)?s?
+	small_redwood:
+		name: small redwood¦s
+		pattern: small (fir|pine|spruce|redwood)( tree)?s?
+	big_redwood:
+		name: tall redwood¦s
+		pattern: (big|tall) (fir|pine|spruce|redwood)( tree)?s?
+	mega_redwood:
+		name: mega redwood¦s
+		pattern: (mega|giant) (fir|pine|spruce|redwood)( tree)?s?
+	birch:
+		name: birch¦es
+		pattern: birch( trees?|es)
+	tall_birch:
+		name: tall birch¦es
+		pattern: (tall|big) birch( trees?|es)
+	jungle:
+		name: jungle tree¦s
+		pattern: (any )?jungle( tree)?s?
+	small_jungle:
+		name: small jungle tree¦s
+		pattern: small jungle( tree)?s?
+	big_jungle:
+		name: big jungle tree¦s
+		pattern: (big|tall|huge|giant|large) jungle( tree)?s?
+	cocoa_tree:
+		name: cocoa tree¦s
+		pattern: cocoa trees?
+	acacia:
+		name: acacia¦s
+		pattern: acacia( tree)?s?
+	dark_oak:
+		name: dark oak¦s
+		pattern: dark oak( tree)?s?
+	jungle_bush:
+		name: bush¦es
+		pattern: (jungle )?bush(es)?
+	swamp:
+		name: swamp tree¦s
+		pattern: swamp trees?
+	mushroom:
+		name: huge mushroom¦s
+		pattern: (any )?(huge|giant|large|big) mushrooms?
+	red_mushroom:
+		name: huge red mushroom¦s
+		pattern: (huge|giant|large|big) red mushrooms?
+	brown_mushroom:
+		name: huge brown mushroom¦s
+		pattern: (huge|giant|large|big) brown mushrooms?
+
+# -- Time --
+time:
+	millisecond:
+		full: millisecond¦s
+		short: ms
+	tick:
+		full: tick¦s
+		short: t
+	second:
+		full: second¦s
+		short: s
+	minute:
+		full: minute¦s
+		short: m
+	hour:
+		full: hour¦s
+		short: h
+	day:
+		full: day¦s
+		short: d
+	week:
+		full: week¦s
+		short: w
+	month:
+		full: month¦s
+		short: mo
+	year:
+		full: year¦s
+		short: y
+	real: real, rl, irl
+	minecraft: mc, minecraft
+	forever: forever
+
+# -- Chat and Wool Colours --
+colors:
+	black:
+		adjective: black
+		names: black
+	dark_grey:
+		adjective: dark grey
+		names: dark grey, dark gray
+	light_grey:
+		adjective: grey
+		names: grey, light grey, gray, light gray, silver
+	white:
+		adjective: white
+		names: white
+	dark_blue:
+		adjective: blue
+		names: blue, dark blue
+	brown:
+		adjective: brown
+		names: brown, light blue, indigo
+	dark_cyan:
+		adjective: cyan
+		names: cyan, aqua, dark cyan, dark aqua, dark turquoise, dark turquois
+	light_cyan:
+		adjective: light cyan
+		names: light cyan, light aqua, turquoise, turquois, light blue
+	dark_green:
+		adjective: green
+		names: green, dark green
+	light_green:
+		adjective: light green
+		names: light green, lime, lime green
+	yellow:
+		adjective: yellow
+		names: yellow, light yellow
+	orange:
+		adjective: orange
+		names: orange, gold, dark yellow
+	dark_red:
+		adjective: red
+		names: red, dark red
+	light_red:
+		adjective: pink
+		names: pink, light red
+	dark_purple:
+		adjective: purple
+		names: purple, dark purple
+	light_purple:
+		adjective: magenta
+		names: magenta, light purple
+
+# -- Chat Styles --
+chat styles:
+	bold: bold, b
+	italic: italic, italics, i
+	strikethrough: strikethrough, strike, s
+	underline: underlined, underline, u
+	magic: magic, obfuscated
+	obfuscated: magic, obfuscated
+	reset: reset, r
+	open_url: link, open url, url
+	run_command: run command, command, cmd
+	suggest_command: suggest command, sgt
+	change_page: change page
+	copy_to_clipboard: copy to clipboard, copy, clipboard
+	show_text: tooltip, show text, ttp
+	font: font, f
+	insertion: insertion, insert, ins
+	translate: translate, tr, lang
+	keybind: keybind, key
+
+# -- Directions --
+directions:
+	meter: meter¦s
+
+	at: at
+
+	up: above
+	down: below
+	north: north
+	east: east
+	south: south
+	west: west
+
+	above: above
+	below: below
+	front: in front of
+	behind: behind
+	right: to the right of
+	left: to the left of
+
+# -- Entities --
+# about patterns:
+#	the tag "plural" is to indicate the pattern is referencing multiple
+#	the tag "unknown_plural" is to indicate the pattern is grammatically correct for both singular and plural
+#		without a suffix, such as "sheep"
+#	the tag "baby" is to indicate the pattern is referencing the baby state of an entity
+#	the tag "adult" is to indicate the pattern is referencing the adult state of an entity
+#	the tag "unknown_age" is to indicate the pattern is not referencing a specific age state of an entity
+entities:
+	age pattern: (unknown_age:|baby:(baby|young)|adult:(adult|grown(-| )up))
+	age adjectives:
+		baby: baby
+		adult: adult
+
+	# AxolotlData
+	axolotl:
+		name: axolotl¦s @an
+		patterns:
+			0: <age> axolotl[plural:s]
+			1: baby:axolotl (kid[plural:s]|child[plural:ren])
+	lucy axolotl:
+		name: axolotl¦s
+		patterns:
+			0: <age> lucy axolotl[plural:s]
+			1: baby:lucy axolotl (kid[plural:s]|child[plural:ren])
+	wild axolotl:
+		name: axolotl¦s
+		patterns:
+			0: <age> wild axolotl[plural:s]
+			1: baby:wild axolotl (kid[plural:s]|child[plural:ren])
+	gold axolotl:
+		name: axolotl¦s
+		patterns:
+			0: <age> gold axolotl[plural:s]
+			1: baby:gold axolotl (kid[plural:s]|child[plural:ren])
+	cyan axolotl:
+		name: axolotl¦s
+		patterns:
+			0: <age> cyan axolotl[plural:s]
+			1: baby:cyan axolotl (kid[plural:s]|child[plural:ren])
+	blue axolotl:
+		name: axolotl¦s
+		patterns:
+			0: <age> blue axolotl[plural:s]
+			1: baby:blue axolotl (kid[plural:s]|child[plural:ren])
+
+	# BeeData
+	bee:
+		name: bee¦s
+		pattern: <age> bee[plural:s]
+	no nectar bee:
+		name: no nectar bee¦s
+		pattern: <age> bee[plural:s] with(out| no) nectar
+	nectar bee:
+		name: nectar bee¦s
+		pattern: <age> bee[plural:s] with nectar
+	happy bee:
+		name: happy bee¦s
+		pattern: <age> happy bee[plural:s]
+	happy nectar bee:
+		name: happy nectar bee¦s
+		pattern: <age> happy bee[plural:s] with nectar
+	happy no nectar bee:
+		name: happy no nectar bee¦s
+		pattern: <age> happy bee[plural:s] with(out| no) nectar
+	angry bee:
+		name: angry bee¦s
+		pattern: <age> angry bee[plural:s]
+	angry no nectar bee:
+		name: angry no nectar bee¦s
+		pattern: <age> angry bee[plural:s] with(out| no) nectar
+	angry nectar bee:
+		name: angry nectar bee¦s
+		pattern: <age> angry bee[plural:s] with nectar
+
+	# BoatChestData
+	chest boat:
+		name: chest boat¦s
+		pattern: chest boat[plural:s]
+	any chest boat:
+		name: chest boat¦s
+		pattern: any chest boat[plural:s]
+	oak chest boat:
+		name: oak chest boat¦s
+		pattern: oak chest boat[plural:s]
+	spruce chest boat:
+		name: spruce chest boat¦s
+		pattern: spruce chest boat[plural:s]
+	birch chest boat:
+		name: birch chest boat¦s
+		pattern: birch chest boat[plural:s]
+	jungle chest boat:
+		name: jungle chest boat¦s
+		pattern: jungle chest boat[plural:s]
+	acacia chest boat:
+		name: acacia chest boat¦s
+		pattern: acacia chest boat[plural:s]
+	dark oak chest boat:
+		name: dark oak chest boat¦s
+		pattern: dark oak chest boat[plural:s]
+	cherry chest boat:
+		name: cherry chest boat¦s
+		pattern: cherry chest boat[plural:s]
+	mangrove chest boat:
+		name: mangrove chest boat¦s
+		pattern: mangrove chest boat[plural:s]
+	bamboo chest raft:
+		name: bamboo chest raft¦s
+		pattern: bamboo chest (raft|boat)[plural:s]
+	pale oak chest boat:
+		name: pale oak chest boat¦s
+		pattern: pale oak chest boat[plural:s]
+
+	# BoatData
+	boat:
+		name: boat¦s
+		pattern: boat[plural:s]
+	any boat:
+		name: boat¦s
+		pattern: any boat[plural:s]
+	oak boat:
+		name: oak boat¦s
+		pattern: oak boat[plural:s]
+	spruce boat:
+		name: spruce boat¦s
+		pattern: spruce boat[plural:s]
+	birch boat:
+		name: birch boat¦s
+		pattern: birch boat[plural:s]
+	jungle boat:
+		name: jungle boat¦s
+		pattern: jungle boat[plural:s]
+	acacia boat:
+		name: acacia boat¦s
+		pattern: acacia boat[plural:s]
+	dark oak boat:
+		name: dark oak boat¦s
+		pattern: dark oak boat[plural:s]
+	mangrove boat:
+		name: mangrove boat¦s
+		pattern: mangrove boat[plural:s]
+	bamboo raft:
+		name: bamboo raft¦s
+		pattern: bamboo (boat|raft)[plural:s]
+	cherry boat:
+		name: cherry boat¦s
+		pattern: cherry [blossom] boat[plural:s]
+	pale oak boat:
+		name: pale oak boat¦s
+		pattern: pale oak boat[plural:s]
+
+	# CatData
+	cat:
+		name: cat¦s
+		patterns:
+			0: <age> [%-cattype%] cat[plural:s]
+			1: tamed <age> ocelot[plural:s]
+			2: baby:[%-cattype%] kitten[plural:s]
+
+	# ChickenData
+	chicken:
+		name: chicken¦s
+		patterns:
+			0: <age> [%-chickenvariant%] chicken[plural:s]
+			1: baby:[%-chickenvariant%] chick[plural:s]
+
+	# CowData
+	cow:
+		name: cow¦s
+		patterns:
+			0: <age> [%-cowvariant%] cow[plural:s]
+			1: baby:[%-cowvariant%] cal(f|plural:ves)
+
+	# CreeperData
+	creeper:
+		name: creeper¦s
+		pattern: creeper[plural:s]
+	unpowered creeper:
+		name: unpowered creeper¦s @an
+		pattern: un(powered|charged) creeper[plural:s]
+	powered creeper:
+		name: powered creeper¦s
+		pattern: (powered|charged) creeper[plural:s]
+
+	# DroppedItemData
+	dropped item:
+		name: dropped item¦s
+		patterns:
+			0: dropped item[plural:s]
+			1: unknown_plural:dropped %-itemtypes%
+			2: dropped item entit(y|plural:ies)
+		adjective: dropped
+
+	# EndermanData
+	enderman:
+		name: ender¦man¦men @an
+		pattern: enderm(a|plural:e)n [(carrying|holding) %-itemtype%]
+		format: %1$s holding %2$s
+
+	# FallingBlockData
+	falling block:
+		name: falling block¦s
+		patterns:
+			0: falling block[plural:s]
+			1: unknown_plural:falling %-itemtype% [block[s]]
+		adjective: falling
+		not a block error: Falling blocks must be blocks, not items
+
+	# FoxData
+	fox:
+		name: fox¦es
+		patterns:
+			0: <age> fox[plural:es]
+			1: baby:fox (kid[plural:s]|child[plural:ren])
+	red fox:
+		name: red fox¦es
+		patterns:
+			0: <age> red fox[plural:es]
+			1: baby:red fox (kid[plural:s]|child[plural:ren])
+	snow fox:
+		name: snow fox¦es
+		patterns:
+			0: <age> snow fox[plural:es]
+			1: baby:snow fox (kid[plural:s]|child[plural:ren])
+
+	# FrogData
+	frog:
+		name: frog¦s
+		patterns:
+			0: <age> frog[plural:s]
+			1: baby:frog (kid[plural:s]|child[plural:ren])
+	temperate frog:
+		name: temperate frog¦s
+		patterns:
+			0: <age> temperate frog[plural:s]
+			1: baby:temperate frog (kid[plural:s]|child[plural:ren])
+	warm frog:
+		name: warm frog¦s
+		patterns:
+			0: <age> warm frog[plural:s]
+			1: baby:warm frog (kid[plural:s]|child[plural:ren])
+	cold frog:
+		name: cold frog¦s
+		patterns:
+			0: <age> cold frog[plural:s]
+			1: baby:cold frog (kid[plural:s]|child[plural:ren])
+
+	# GoatData
+	goat:
+		name: goat¦s
+		patterns:
+			0: <age> goat[plural:s]
+			1: baby:goat (kid[plural:s]|child[plural:ren])
+	screaming goat:
+		name: goat¦s
+		patterns:
+			0: <age> screaming goat[plural:s]
+			1: baby:screaming goat (kid[plural:s]|child[plural:ren])
+	quiet goat:
+		name: goat¦s
+		patterns:
+			0: <age> quiet goat[plural:s]
+			1: baby:quiet goat (kid[plural:s]|child[plural:ren])
+
+	# LlamaData
+	llama:
+		name: llama¦s
+		patterns:
+			0: <age> llama[plural:s]
+			1: baby:llama cria[plural:s]
+	creamy llama:
+		name: creamy llama¦s
+		patterns:
+			0: <age> creamy llama[plural:s]
+			1: baby:creamy llama cria[plural:s]
+	white llama:
+		name: white llama¦s
+		patterns:
+			0: <age> white llama[plural:s]
+			1: baby:white llama cria[plural:s]
+	brown llama:
+		name: brown llama¦s
+		patterns:
+			0: <age> brown llama[plural:s]
+			1: baby:brown llama cria[plural:s]
+	gray llama:
+		name: gray llama¦s
+		patterns:
+			0: <age> gray llama[plural:s]
+			1: baby:gray llama cria[plural:s]
+	trader llama:
+		name: trader llama¦s
+		patterns:
+			0: <age> trader llama[plural:s]
+			1: baby:trader llama cria[plural:s]
+	creamy trader llama:
+		name: creamy trader llama¦s
+		patterns:
+			0: <age> creamy trader llama[plural:s]
+			1: baby:creamy trader llama cria[plural:s]
+	white trader llama:
+		name: white trader llama¦s
+		patterns:
+			0: <age> white trader llama[plural:s]
+			1: baby:white trader llama cria[plural:s]
+	brown trader llama:
+		name: brown trader llama¦s
+		patterns:
+			0: <age> brown trader llama[plural:s]
+			1: baby:brown trader llama cria[plural:s]
+	gray trader llama:
+		name: gray trader llama¦s
+		patterns:
+			0: <age> gray trader llama[plural:s]
+			1: baby:gray trader llama cria[plural:s]
+
+	# MinecartData
+	minecart:
+		name: minecart¦s
+		pattern: [mine]cart[plural:s]
+	regular minecart:
+		name: regular minecart¦s
+		pattern: regular [mine]cart[plural:s]
+	storage minecart:
+		name: storage minecart¦s
+		patterns:
+			0: storage [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with chest[s]
+	powered minecart:
+		name: powered minecart¦s
+		patterns:
+			0: powered [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with furnace[s]
+	hopper minecart:
+		name: hopper minecart¦s
+		patterns:
+			0: hopper [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with hopper[s]
+	explosive minecart:
+		name: explosive minecart¦s
+		patterns:
+			0: explosive [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with TNT[s]
+	spawner minecart:
+		name: spawner minecart¦s
+		patterns:
+			0: [monster|mob] spawner [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with [monster|mob] spawner[s]
+	command minecart:
+		name: command minecart¦s
+		patterns:
+			0: command [block] [mine]cart[plural:s]
+			1: [mine]cart[plural:s] with command block[s]
+
+	# MooshroomData
+	mooshroom:
+		name: mooshroom¦s
+		patterns:
+			0: <age> (mooshroom[ cow]|mushroom cow)[plural:s]
+			1: baby:(mooshroom|mushroom) cal(f|plural:ves)
+			2: baby:mooshroom (kid[plural:s]|child[plural:ren])
+	red mooshroom:
+		name: red mooshroom¦s
+		patterns:
+			0: <age> red (mooshroom[ cow]|mushroom cow)[plural:s]
+			1: baby:red (mooshroom|mushroom) cal(f|plural:ves)
+			2: baby:red mooshroom (kid[plural:s]|child[plural:ren])
+	brown mooshroom:
+		name: brown mooshroom¦s
+		patterns:
+			0: <age> brown (mooshroom[ cow]|mushroom cow)[plural:s]
+			1: baby:brown (mooshroom|mushroom) cal(f|plural:ves)
+			2: baby:brown mooshroom (kid[plural:s]|child[plural:ren])
+
+	# PandaData
+	panda:
+		name: panda¦s
+		pattern: <age> [%-gene%[[-]%-gene%]] panda[plural:s]
+
+	# ParrotData
+	parrot:
+		name: parrot¦s
+		pattern: parrot[plural:s]
+	red parrot:
+		name: red parrot¦s
+		pattern: red parrot[plural:s]
+	blue parrot:
+		name: blue parrot¦s
+		pattern: blue parrot[plural:s]
+	green parrot:
+		name: green parrot¦s
+		pattern: green parrot[plural:s]
+	cyan parrot:
+		name: cyan parrot¦s
+		pattern: cyan parrot[plural:s]
+	gray parrot:
+		name: gray parrot¦s
+		pattern: gray parrot[plural:s]
+
+	# PigData
+	pig:
+		name: pig¦s
+		patterns:
+			0: <age> [%-pigvariant%] pig[plural:s]
+			1: [%-pigvariant%] <age> pig[plural:s]
+			2: baby:[%-pigvariant%] piglet[plural:s]
+	saddled pig:
+		name: saddled pig¦s
+		patterns:
+			0: saddled [%-pigvariant%] pig[plural:s]
+			1: [%-pigvariant%] saddled pig[plural:s]
+	unsaddled pig:
+		name: unsaddled pig¦s @an
+		patterns:
+			0: unsaddled [%-pigvariant%] pig[plural:s]
+			1: [%-pigvariant%] unsaddled pig[plural:s]
+
+	# RabbitData
+	rabbit:
+		name: rabbit¦s
+		patterns:
+			0: <age> rabbit[plural:s]
+			1: rabbit <age>[plural:s]
+	brown rabbit:
+		name: brown rabbit¦s
+		patterns:
+			0: <age> brown rabbit[plural:s]
+			1: brown <age> rabbit[plural:s]
+			2: brown rabbit <age>[plural:s]
+	black and white rabbit:
+		name: black and white rabbit¦s
+		patterns:
+			0: <age> black [and] white rabbit[plural:s]
+			1: black [and] white <age> rabbit[plural:s]
+			2: black [and] white rabbit <age>[plural:s]
+	white rabbit:
+		name: white rabbit¦s
+		patterns:
+			0: <age> white rabbit[plural:s]
+			1: white <age> rabbit[plural:s]
+			2: white rabbit <age>[plural:s]
+	black rabbit:
+		name: black rabbit¦s
+		patterns:
+			0: <age> black rabbit[plural:s]
+			1: black <age> rabbit[plural:s]
+			2: black rabbit <age>[plural:s]
+	gold rabbit:
+		name: gold rabbit¦s
+		patterns:
+			0: <age> gold rabbit[plural:s]
+			1: gold <age> rabbit[plural:s]
+			2: gold rabbit <age>[plural:s]
+	salt and pepper rabbit:
+		name: salt and pepper rabbit¦s
+		patterns:
+			0: <age> salt [and] pepper rabbit[plural:s]
+			1: salt [and] pepper <age> rabbit[plural:s]
+			2: salt [and] pepper rabbit <age>[plural:s]
+	killer rabbit:
+		name: killer rabbit¦s
+		patterns:
+			0: <age> killer rabbit[plural:s]
+			1: killer <age> rabbit[plural:s]
+			2: killer rabbit <age>[plural:s]
+
+	# SalmonData
+	salmon:
+		name: salmon¦s
+		pattern: salmon[plural:s]
+	any salmon:
+		name: salmon¦s
+		pattern: any salmon[plural:s]
+	large salmon:
+		name: large salmon¦s
+		pattern: large salmon[plural:s]
+	medium salmon:
+		name: medium salmon¦s
+		pattern: medium salmon[plural:s]
+	small salmon:
+		name: small salmon¦s
+		pattern: small salmon[plural:s]
+
+	# SheepData
+	sheep:
+		name: sheep
+		# while sheep is ambiguous, sheeps is plural (even though it's wrong)
+		patterns:
+			0: [%-colors%] <age> sheep(unknown_plural:|plural:s)
+			1: <age> [%-colors%] sheep(unknown_plural:|plural:s)
+			2: baby:[%-colors%] lamb[plural:s]
+	unsheared sheep:
+		name: unsheared sheep @an
+		patterns:
+			0: unsheared [%-colors%] sheep(unknown_plural:|plural:s)
+			1: [%-colors%] unsheared sheep(unknown_plural:|plural:s)
+	sheared sheep:
+		name: sheared sheep
+		patterns:
+			0: sheared [%-colors%] sheep(unknown_plural:|plural:s)
+			1: [%-colors%] sheared sheep(unknown_plural:|plural:s)
+
+	# StriderData
+	strider:
+		name: strider¦s
+		patterns:
+			0: <age> strider[plural:s]
+			1: baby:strider (kid[plural:s]|child[plural:ren])
+	warm strider:
+		name: warm strider¦s
+		patterns:
+			0: <age> warm strider[plural:s]
+			1: baby:warm strider (kid[plural:s]|child[plural:ren])
+	shivering strider:
+		name: shivering strider¦s, cold strider¦s
+		patterns:
+			0: <age> (cold|shivering) strider[plural:s]
+			1: baby:(cold|shivering) strider (kid[plural:s]|child[plural:ren])
+
+	# ThrownPotionData
+	thrown potion:
+		name: thrown potion¦s
+		pattern: thrown (potion[plural:s]|unknown_plural:%-itemtypes%)
+		adjective: thrown
+
+	# TropicalFishData
+	tropical fish:
+		name: tropical fish¦es
+		patterns:
+			0: [%-color%[-%-color%]] tropical fish[plural:es]
+			1: fully %-color% tropical fish[plural:es]
+	kob:
+		name: kob¦s
+		patterns:
+			0: [%-color%[-%-color%]] kob[plural:s]
+			1: fully %-color% kob[plural:s]
+	sunstreak:
+		name: sunstreak¦s
+		patterns:
+			0: [%-color%[-%-color%]] sunstreak[plural:s]
+			1: fully %-color% sunstreak[plural:s]
+	snooper:
+		name: snooper¦s
+		patterns:
+			0: [%-color%[-%-color%]] snooper[plural:s]
+			1: fully %-color% snooper[plural:s]
+	dasher:
+		name: dasher¦s
+		patterns:
+			0: [%-color%[-%-color%]] dasher[plural:s]
+			1: fully %-color% dasher[plural:s]
+	brinely:
+		name: brinely¦s
+		patterns:
+			0: [%-color%[-%-color%]] brinely[plural:s]
+			1: fully %-color% brinely[plural:s]
+	spotty:
+		name: spotty¦s
+		patterns:
+			0: [%-color%[-%-color%]] spotty[plural:s]
+			1: fully %-color% spotty[plural:s]
+	flopper:
+		name: flopper¦s
+		patterns:
+			0: [%-color%[-%-color%]] flopper[plural:s]
+			1: fully %-color% flopper[plural:s]
+	stripey:
+		name: stripey¦s
+		patterns:
+			0: [%-color%[-%-color%]] stripey[plural:s]
+			1: fully %-color% stripey[plural:s]
+	glitter:
+		name: glitter¦s
+		patterns:
+			0: [%-color%[-%-color%]] glitter[plural:s]
+			1: fully %-color% glitter[plural:s]
+	blockfish:
+		name: blockfish¦s
+		patterns:
+			0: [%-color%[-%-color%]] blockfish[plural:[e]s]
+			1: fully %-color% blockfish[plural:[e]s]
+	betty:
+		name: betty¦s
+		patterns:
+			0: [%-color%[-%-color%]] betty[plural:s]
+			1: fully %-color% betty[plural:s]
+	clayfish:
+		name: clayfish¦s
+		patterns:
+			0: [%-color%[-%-color%]] clayfish[plural:[e]s]
+			1: fully %-color% clayfish[plural:[e]s]
+
+	# VillagerData
+	villager:
+		name: villager¦s
+		patterns:
+			0: <age> villager[plural:s]
+			1: baby:villager (kid[plural:s]|child[plural:ren])
+	unemployed:
+		name: unemployed villager¦s
+		patterns:
+			0: <age> (unemployed|jobless) villager[plural:s]
+			1: baby:(unemployed|jobless|normal) villager (kid[plural:s]|child[plural:ren])
+	armorer:
+		name: armorer¦s
+		patterns:
+			0: <age> armo[u]rer[plural:s]
+			1: baby:armo[u]rer (kid[plural:s]|child[plural:ren])
+	cartographer:
+		name: cartographer¦s
+		patterns:
+			0: <age> cartographer[plural:s]
+			1: baby:cartographer (kid[plural:s]|child[plural:ren])
+	cleric:
+		name: cleric¦s
+		patterns:
+			0: <age> cleric[plural:s]
+			1: baby:cleric (kid[plural:s]|child[plural:ren])
+	fisherman:
+		name: fisherman¦s
+		patterns:
+			0: <age> fisherman[plural:s]
+			1: baby:fisherman (kid[plural:s]|child[plural:ren])
+	fletcher:
+		name: fletcher¦s
+		patterns:
+			0: <age> fletcher[plural:s]
+			1: baby:fletcher (kid[plural:s]|child[plural:ren])
+	leatherworker:
+		name: leatherworker¦s
+		patterns:
+			0: <age> leatherworker[plural:s]
+			1: baby:leatherworker (kid[plural:s]|child[plural:ren])
+	mason:
+		name: mason¦s
+		patterns:
+			0: <age> mason[plural:s]
+			1: baby:mason (kid[plural:s]|child[plural:ren])
+	shepherd:
+		name: shepherd¦s
+		patterns:
+			0: <age> shepherd[plural:s]
+			1: baby:shepherd (kid[plural:s]|child[plural:ren])
+	toolsmith:
+		name: toolsmith¦s
+		patterns:
+			0: <age> tool[ ](smith|maker)[plural:s]
+			1: baby:tool[ ](smith|maker) (kid[plural:s]|child[plural:ren])
+	weaponsmith:
+		name: weaponsmith¦s
+		patterns:
+			0: <age> weapon[ ]smith[plural:s]
+			1: baby:weapon[ ]smith (kid[plural:s]|child[plural:ren])
+	farmer:
+		name: farmer¦s
+		patterns:
+			0: <age> farmer[plural:s]
+			1: baby:farmer (kid[plural:s]|child[plural:ren])
+	librarian:
+		name: librarian¦s
+		patterns:
+			0: <age> librarian[plural:s]
+			1: baby:librarian (kid[plural:s]|child[plural:ren])
+	butcher:
+		name: butcher¦s
+		patterns:
+			0: <age> butcher[plural:s]
+			1: baby:butcher (kid[plural:s]|child[plural:ren])
+	nitwit:
+		name: nitwit¦s
+		patterns:
+			0: <age> nitwit[plural:s]
+			1: baby:nitwit (kid[plural:s]|child[plural:ren])
+
+	# WolfData
+	wolf:
+		name: wol¦f¦ves
+		pattern: <age> [%-wolfvariant%] wol(f|plural:ves) [[with collar] colo[u]r[ed] %-color%]
+	tamed wolf:
+		name: tamed wol¦f¦ves
+		patterns:
+			0: <age> [%-wolfvariant%] dog[plural:s] [[with collar] colo[u]r[ed] %-color%]
+			1: tamed <age> [%-wolfvariant%] wol(f|plural:ves) [[with collar] colo[u]r[ed] %-color%]
+			2: baby:[%-wolfvariant%] [wolf] pup[py|plural:pies] [[with collar] colo[u]r[ed] %-color%]
+	wild wolf:
+		name: wild wol¦f¦ves
+		pattern: (wild|untamed) <age> [%-wolfvariant%] wol(f|plural:ves) [[with collar] colo[u]r[ed] %-color%]
+	angry wolf:
+		name: angry wol¦f¦ves @an
+		pattern: (angry|aggressive) <age> [%-wolfvariant%] wol(f|plural:ves) [[with collar] colo[u]r[ed] %-color%]
+	peaceful wolf:
+		name: peaceful wol¦f¦ves
+		pattern: (peaceful|neutral|unaggressive) <age> [%-wolfvariant%] wol(f|plural:ves) [[with collar] colo[u]r[ed] %-color%]
+
+	# XpOrbData
+	xp-orb:
+		name: experience orb¦s @an
+		pattern: ([e]xp|experience)( |-)orb[plural:s]
+		format: %2$s-%1$s
+
+	# ZombieVillagerData
+	zombie villager:
+		name: zombie villager¦s
+		pattern: <age> zombie villager[plural:s]
+	zombie normal:
+		name: zombie villager¦s
+		pattern: <age> (unemployed|jobless|normal) zombie villager[plural:s]
+	zombie farmer:
+		name: zombie farmer¦s
+		pattern: <age> zombie farmer[plural:s]
+	zombie librarian:
+		name: zombie librarian¦s
+		pattern: <age> zombie librarian[plural:s]
+	zombie butcher:
+		name: zombie butcher¦s
+		pattern: <age> zombie butcher[plural:s]
+	zombie nitwit:
+		name: zombie nitwit¦s
+		pattern: <age> zombie nitwit[plural:s]
+	zombie armorer:
+		name: zombie armorer¦s
+		pattern: <age> zombie armo[u]rer[plural:s]
+	zombie cartographer:
+		name: zombie cartographer¦s
+		pattern: <age> zombie cartographer[plural:s]
+	zombie cleric:
+		name: zombie cleric¦s
+		pattern: <age> zombie cleric[plural:s]
+	zombie fisherman:
+		name: zombie fisher¦man¦men
+		pattern: <age> zombie fisherm(an|plural:en)
+	zombie fletcher:
+		name: zombie fletcher¦s
+		pattern: <age> zombie fletcher[plural:s]
+	zombie leatherworker:
+		name: zombie leatherworker¦s
+		pattern: <age> zombie leatherworker[plural:s]
+	zombie mason:
+		name: zombie mason¦s
+		pattern: <age> zombie mason[plural:s]
+	zombie shepherd:
+		name: zombie shepherd¦s
+		pattern: <age> zombie shepherd[plural:s]
+	zombie toolsmith:
+		name: zombie toolsmith¦s
+		pattern: <age> zombie toolsmith[plural:s]
+	zombie weaponsmith:
+		name: zombie weaponsmith¦s
+		pattern: <age> zombie weaponsmith[plural:s]
+
+	# DisplayData
+	display:
+		name: display¦s
+		patterns:
+			0: display[plural:s]
+			1: display entit(y|plural:ies)
+	block display:
+		name: block display¦s
+		patterns:
+			0: block display[plural:s] [of %-blockdata/itemtype%]
+			1: block display entit(y|plural:ies) [of %-blockdata/itemtype%]
+			2: %-blockdata/itemtype% block display[plural:s]
+			3: %-blockdata/itemtype% block display entit(y|plural:ies)
+	item display:
+		name: item display¦s
+		patterns:
+			0: item display[plural:s] [of %-itemtype%]
+			1: item display entit(y|plural:ies) [of %-itemtype%]
+			2: %-itemtype% item display[plural:s]
+			3: %-itemtype% item display entit(y|plural:ies)
+	text display:
+		name: text display¦s
+		patterns:
+			0: text display[plural:s]
+			1: text display entit(y|plural:ies)
+
+	# SimpleEntityData
+
+	# Alpha + Beta Entities
+	zombie:
+		name: zombie¦s
+		patterns:
+			0: <age> zombie[plural:s]
+			1: baby:zombie (kid[plural:s]|child[plural:ren])
+	skeleton:
+		name: skeleton¦s
+		pattern: skeleton[plural:s]
+	tnt:
+		name: TNT
+		pattern: ([primed] TNT(unknown_plural:|plural:s)|TNT entit(y|plural:ies))
+	spider:
+		name: spider¦s
+		pattern: spider[plural:s]
+	player:
+		name: player¦s
+		pattern: player[plural:s]
+	lightning bolt:
+		name: lightning bolt¦s
+		pattern: lightning bolt[plural:s]
+	giant:
+		name: giant¦s
+		pattern: giant[plural:s]
+	ghast:
+		name: ghast¦s
+		pattern: ghast[plural:s]
+	fish hook:
+		name: fish hook¦s
+		pattern: fish[ ]hook[plural:s]
+	fireball:
+		name: fireball¦s
+		pattern: [(ghast|big)] fire[ ]ball[plural:s]
+	dragon fireball:
+		name: dragon fireball¦s
+		pattern: dragon fire[ ]ball[plural:s]
+	small fireball:
+		name: small fireball¦s
+		pattern: (small|blaze) fire[ ]ball[plural:s]
+	large fireball:
+		name: large fireball¦s
+		pattern: large fire[ ]ball[plural:s]
+	ender crystal:
+		name: ender crystal¦s @an
+		pattern: end[er][ ]crystal[plural:s]
+	ender dragon:
+		name: ender dragon¦s @an
+		pattern: ender[ ]dragon[plural:s]
+	ender pearl:
+		name: ender pearl¦s @an
+		pattern: ender[ ]pearl[plural:s]
+	egg:
+		name: egg¦s @an
+		pattern: egg[plural:s]
+	cave spider:
+		name: cave spider¦s
+		pattern: cave[ ]spider[plural:s]
+	arrow:
+		name: arrow¦s @an
+		pattern: arrow[plural:s]
+	squid:
+		name: squid¦s
+		pattern: <age> squid[plural:s]
+
+	# 1.0 Entities
+	snowball:
+		name: snowball¦s
+		pattern: snowball[plural:s]
+	snow golem:
+		name: snow golem¦s
+		pattern: snow[ ](golem[plural:s]|m(an|plural:en))
+	slime:
+		name: slime¦s
+		pattern: slime[plural:s]
+	magma cube:
+		name: magma cube¦s
+		pattern: magma (cube|slime)[plural:s]
+	ender eye:
+		name: ender eye¦s @an
+		pattern: ender eye[plural:s]|eye[plural:s] of ender
+	blaze:
+		name: blaze¦s
+		pattern: blaze[plural:s]
+
+	# 1.2 Entities
+	zombie pigman:
+		name: zombie pig¦man¦men|zombified piglin
+		patterns:
+			0: <age> zombie pigm(an|plural:en)
+			1: <age> zombified piglin[plural:s]
+			2: baby:zombie pigletboy[plural:s]
+			3: baby:zombified piglin (kid[plural:s]|child[plural:ren])
+	bottle of enchanting:
+		name: bottle¦ of enchanting¦s of enchanting
+		pattern: [thrown] bottle[plural:s] o(f|') enchanting|[e]xp[erience] bottle[plural:s]
+	iron golem:
+		name: iron golem¦s @an
+		pattern: iron golem[plural:s]
+	ocelot:
+		name: ocelot¦s @an
+		pattern: [wild|untamed] <age> ocelot[plural:s]
+
+	# 1.4 Entities
+	wither:
+		name: wither¦s
+		pattern: wither[plural:s]
+	wither skeleton:
+		name: wither skeleton¦s
+		pattern: wither skeleton[plural:s]
+	wither skull:
+		name: wither skull¦s
+		pattern: wither skull[ projectile][plural:s]
+	firework:
+		name: firework rocket¦s
+		pattern: firework[ rocket][plural:s]
+	witch:
+		name: witch¦es
+		pattern: witch[plural:es]
+	bat:
+		name: bat¦s
+		pattern: <age> bat[plural:s]
+	item frame:
+		name: item frame¦s @an
+		pattern: item[ ]frame[plural:s]
+	painting:
+		name: painting¦s
+		pattern: painting[plural:s]
+
+	# 1.6 Entities
+	horse:
+		name: horse¦s
+		pattern: <age> horse[plural:s]|baby:foal[plural:s]
+	donkey:
+		name: donkey¦s
+		pattern: <age> donkey[plural:s]
+	mule:
+		name: mule¦s
+		pattern: <age> mule[plural:s]
+	undead horse:
+		name: undead horse¦s @an
+		patterns:
+			0: <age> (zombie|undead) horse[plural:s]
+			1: (zombie|undead) <age> horse[plural:s]
+			2: baby:(zombie|undead) foal[plural:s]
+	skeleton horse:
+		name: skeleton horse¦s
+		patterns:
+			0: <age> skeleton horse[plural:s]
+			1: skeleton <age> horse[plural:s]
+			2: baby:skeleton foal[plural:s]
+	leash hitch:
+		name: leash hitch¦es
+		pattern: leash hitch[plural:es]
+
+	# 1.8 Entities
+	elder guardian:
+		name: elder guardian¦s
+		pattern: elder guardian[plural:s]
+	normal guardian:
+		name: normal guardian¦s
+		pattern: normal guardian[plural:s]
+	armor stand:
+		name: armor stand¦s
+		pattern: armo[u]r stand[plural:s]
+	endermite:
+		name: endermite¦s
+		pattern: endermite[plural:s]
+	silverfish:
+		name: silverfish¦es
+		pattern: silverfish[unknown_plural:|plural:es]
+	tipped arrow:
+		name: tipped arrow¦s
+		pattern: tipped arrow[plural:s]
+
+	# 1.9 Entities
+	area effect cloud:
+		name: area effect cloud¦s
+		pattern: area effect cloud[plural:s]
+	shulker:
+		name: shulker¦s
+		pattern: shulker[plural:s]
+	shulker bullet:
+		name: shulker bullet¦s
+		pattern: shulker bullet[plural:s]
+	spectral arrow:
+		name: spectral arrow
+		pattern: spectral[ ]arrow[plural:s]
+
+	# 1.10 Entities
+	husk:
+		name: husk¦s
+		pattern: <age> husk[plural:s]
+	stray:
+		name: stray¦s
+		pattern: stray[plural:s]
+	polar bear:
+		name: polar bear¦s
+		pattern: <age> polar bear[plural:s]
+
+	# 1.11 Entities
+	llama spit:
+		name: llama spit¦s
+		pattern: llama spit[plural:s]
+	vindicator:
+		name: vindicator¦s
+		pattern: vindicator[plural:s]
+	vex:
+		name: vex¦es
+		pattern: vex[plural:es]
+	evoker:
+		name: evoker¦s
+		pattern: evoker[plural:s]
+	evoker fangs:
+		name: evoker fangs
+		pattern: evoker fangs
+
+	# 1.12 Entities
+	illusioner:
+		name: illusioner¦s
+		pattern: illusioner[plural:s]
+
+	# 1.13 Entities
+	trident:
+		name: trident¦s
+		pattern: trident[plural:s]
+	cod:
+		name: cod¦s
+		pattern: cod[plural:s]
+	puffer fish:
+		name: puffer fish¦es
+		pattern: puffer[ ]fish[plural:es]
+	turtle:
+		name: turtle¦s
+		patterns:
+			0: <age> turtle[plural:s]
+			1: baby:turtle (kid[plural:s]|child[plural:ren])
+	drowned:
+		name: drowned¦s
+		patterns:
+			0: <age> drowned[plural:s]
+			1: baby:drowned (kid[plural:s]|child[plural:ren])
+	dolphin:
+		name: dolphin¦s
+		pattern: <age> dolphin[plural:s]
+	phantom:
+		name: phantom¦s
+		pattern: phantom[plural:s]
+
+	# 1.14 Entities
+	pillager:
+		name: pillager¦s
+		pattern: pillager[plural:s]
+	ravager:
+		name: ravager¦s
+		pattern: ravager[plural:s]
+	wandering trader:
+		name: wandering trader¦s
+		patterns:
+			0: <age> wandering trader[plural:s]
+			1: baby:wandering trader (kid[plural:s]|child[plural:ren])
+
+	# 1.16 Entities
+	piglin:
+		name: piglin¦s
+		patterns:
+			0: <age> piglin[plural:s]
+			1: baby:piglin (kid[plural:s]|child[plural:ren])
+	hoglin:
+		name: hoglin¦s
+		patterns:
+			0: <age> hoglin[plural:s]
+			1: baby:hoglin (kid[plural:s]|child[plural:ren])
+	zoglin:
+		name: zoglin¦s
+		patterns:
+			0: <age> zoglin[plural:s]
+			1: baby:zoglin (kid[plural:s]|child[plural:ren])
+	piglin brute:
+		name: piglin brute¦s
+		patterns:
+			0: <age> piglin brute[plural:s]
+			1: baby:piglin brute (kid[plural:s]|child[plural:ren])
+
+	# 1.17 Entities
+	glow squid:
+		name: glow squid¦s
+		pattern: <age> glow squid[plural:s]
+	marker:
+		name: marker¦s
+		pattern: marker[plural:s]
+	glow item frame:
+		name: glow item frame¦s
+		pattern: glow item[ ]frame[plural:s]
+
+	# 1.19 Entities
+	allay:
+		name: allay¦s
+		pattern: allay[plural:s]
+	tadpole:
+		name: tadpole¦s
+		pattern: tadpole[plural:s]
+	warden:
+		name: warden¦s
+		pattern: warden[plural:s]
+	camel:
+		name: camel¦s
+		pattern: camel[plural:s]
+	sniffer:
+		name: sniffer¦s
+		pattern: sniffer[plural:s]
+	interaction:
+		name: interaction¦s
+		pattern: interaction([plural:s]| entit(plural:ies|y))
+
+	# 1.20.3 Entities
+	breeze:
+		name: breeze¦s
+		pattern: breeze[plural:s]
+	wind charge:
+		name: wind charge¦s
+		pattern: wind charge[plural:s]
+
+	# 1.20.5 Entities
+	armadillo:
+		name: armadillo¦s @an
+		patterns:
+			0: <age> armadillo[plural:s]
+			1: baby:armadillo (kid[plural:s]|child[plural:ren])
+	bogged:
+		name: bogged¦s
+		pattern: bogged[plural:s]
+
+	# 1.21.2 Entities
+	creaking:
+		name: creaking¦s
+		pattern: creaking[plural:s]
+
+	# 1.21.6 Entities
+	happy ghast:
+		name: happy ghast¦s
+		patterns:
+			0: <age> happy ghast[plural:s]
+			1: baby:[happy] ghastling[plural:s]
+
+	# 1.21.9 Entities
+	copper golem:
+		name: copper golem¦s
+		pattern: copper golem[plural:s]
+	mannequin:
+		name: mannequin¦s
+		pattern: mannequin[plural:s]
+
+	# 1.21.11
+	# NautilusData
+	nautilus:
+		name: nautilus¦es
+		pattern: [:tamed] <age> nautilus[plural:es]
+	# ZombieNautilusData
+	zombie nautilus:
+		name: zombie nautilus¦es
+		pattern: [:tamed] [%-zombienautilusvariant%] (zombie|zombified) nautilus[plural:es]
+	any nautilus:
+		name: any nautilus¦es
+		pattern: any <age> nautilus[plural:es]
+	camel husk:
+		name: camel husk¦s
+		pattern: camel husk[plural:s]
+	parched:
+		name: parched¦s
+		pattern: parched[plural:s]
+
+	# SuperTypes
+	human:
+		name: human¦s
+		pattern: human[plural:s]
+	damageable:
+		name: damageable mob¦s
+		pattern: damageable mob[plural:s]
+	monster:
+		name: monster¦s
+		pattern: monster[plural:s]
+	mob:
+		name: mob¦s
+		pattern: mob[plural:s]
+	creature:
+		name: creature¦s
+		pattern: <age> creature[plural:s]
+	animal:
+		name: animal¦s
+		pattern: animal[plural:s]
+	tameable:
+		name: tameable creature¦s
+		pattern: tameable creature[plural:s]
+	fish:
+		name: fish¦es
+		pattern: fish[plural:es]
+	golem:
+		name: golem¦s
+		pattern: golem[plural:s]
+	projectile:
+		name: projectile¦s
+		pattern: projectile[plural:s]
+	living entity:
+		name: living entit¦y¦ies
+		pattern: <age> living entit(y|plural:ies)
+	entity:
+		name: entit¦y¦ies @an
+		pattern: <age> entit(y|plural:ies)
+	chested horse:
+		name: chested horse¦s
+		pattern: <age> chested horse[plural:s]
+	any horse:
+		name: any horse¦s
+		patterns:
+			0: <age> any horse[plural:s]
+			1: baby:foal[plural:s]
+	guardian:
+		name: guardian¦s
+		pattern: guardian[plural:s]
+	water mob:
+		name: water mob¦s
+		pattern: water mob[plural:s]
+	any fireball:
+		name: any fireball¦s
+		pattern: any fire[ ]ball[plural:s]
+	illager:
+		name: illager¦s
+		pattern: illager[plural:s]
+	spellcaster:
+		name: spellcaster¦s
+		pattern: spellcaster[plural:s]
+	raider:
+		name: raider¦s
+		pattern: raider[plural:s]
+	enemy:
+		name: enem¦y¦ies @an
+		pattern: enem(y|plural:ies)
+
+# -- Heal Reasons --
+heal reasons:
+	custom: unknown, custom, plugin, a plugin
+	eating: eating, consuming, ingesting
+	ender_crystal: end crystal, ender crystal, an end crystal, an ender crystal
+	magic: magic, potion, a potion
+	magic_regen: magic regen, magic regeneration, a magic regen, a magic regeneration, a healing potion, a regeneration potion, healing potion, regeneration potion, regen potion, a regen potion
+	regen: peaceful regeneration, peaceful regen, peaceful
+	satiated: satiated, satisfied, fed, sated
+	wither: withering, withered, wither potion, a wither effect, wither effect, wither
+	wither_spawn: wither spawning, wither spawn, wither summoning, a wither summoning, a wither spawn, a wither spawning
+
+# -- Cat Types --
+cat types:
+	tabby: tabby
+	black: black
+	red: red
+	siamese: siamese
+	british_shorthair: british shorthair
+	calico: calico
+	persian: persian
+	ragdoll: ragdoll
+	white: white
+	jellie: jellie
+	all_black: all black
+
+# -- Wolf Variants --
+wolf variants:
+	ashen: ashen
+	black: black
+	chestnut: chestnut
+	pale: pale
+	rusty: rusty
+	snowy: snowy
+	spotted: spotted
+	striped: striped
+	woods: woods
+
+# -- Damage Causes --
+damage causes:
+	contact: contact
+	entity_attack: attack, entity attack, an attack, an entity attack
+	entity_sweep_attack: sweep attack, sweeping
+	projectile: projectile, a projectile
+	suffocation: suffocation, suffocate
+	fall: fall, a fall
+	fire: fire, a fire
+	fire_tick: burning, burn
+	melting: melting, melt
+	lava: lava
+	drowning: drowning, drown
+	block_explosion: block explosion, a block explosion
+	entity_explosion: entity explosion, an entity explosion
+	void: void, the void
+	lightning: lightning, lightning strike, a lightning, a lightning strike
+	starvation: starvation
+	poison: poison
+	magic: potion, a potion
+	wither: wither, wither effect, a wither, wither potion effect
+	falling_block: falling block, a falling block
+	suicide: suicide
+	thorns: thorns
+	dragon_breath: dragon's breath, dragonfire
+	fly_into_wall: hitting wall while flying, flying into a wall
+	hot_floor: magma, hot floor
+	cramming: cramming
+	freeze: freeze
+	dryout: dryout
+	custom: unknown, custom, plugin, a plugin
+	sonic_boom: sonic boom
+	kill: kill, killed
+	world_border: world border
+	# 1.21
+	campfire: campfire
+
+# -- Teleport Causes --
+teleport causes:
+	chorus_fruit: chorus, chorus fruit
+	command: command
+	end_gateway: gateway, end gateway, ender gateway
+	end_portal: end portal, ender portal
+	ender_pearl: ender pearl
+	nether_portal: nether portal
+	plugin: plugin
+	spectate: spectate, spectator
+	unknown: unknown
+	dismount: dismount, dismounted
+	exit_bed: exit bed, exiting bed, bed exit
+	consumable_effect: consumable effect
+
+# -- Inventory Close Reasons --
+inventory close reasons:
+	unknown: unknown
+	teleport: teleport
+	cant_use: can't use, can not use, cannot use
+	unloaded: unloaded
+	open_new: open new, new opened
+	player: player
+	disconnect: disconnected, disconnect
+	death: death
+	plugin: plugin
+
+# -- Game Modes --
+game modes:
+	survival: survival
+	creative: creative
+	adventure: adventure
+	spectator: spectator
+
+# -- Inventory Actions --
+inventory actions:
+	nothing: nothing, do nothing
+	pickup_all: pickup all, pickup all items
+	pickup_some: pickup some, pickup some items
+	pickup_half: pickup half, pickup half stack
+	pickup_one: pickup one item, pickup single item, pickup single
+	place_all: place all, place all items
+	place_some: place some, place some items
+	place_one: place one, place one item
+	swap_with_cursor: swap with cursor, swap stack with cursor, swap cursor, swap cursor stack
+	drop_all_cursor: drop all from cursor, drop stack from cursor, drop items from cursor, drop stack from cursor, drop cursor, drop cursor stack
+	drop_one_cursor: drop one from cursor, drop one item from cursor, drop single item from cursor, drop cursor item
+	drop_all_slot: drop all from slot, drop stack from slot, drop items from slot, drop stack from slot, drop slot, drop slot stack
+	drop_one_slot: drop one from slot, drop one item from slot, drop single item from slot, drop slot item
+	move_to_other_inventory: instant move, move to other inventory, shift move
+	hotbar_move_and_readd: hotbar move and readd
+	hotbar_swap: swap with hotbar, swap items with hotbar, hotbar swap, hotbar swap items
+	clone_stack: clone stack
+	collect_to_cursor: collect to cursor, collect items to cursor
+	unknown: unknown, unsupported, custom
+	pickup_from_bundle: pickup from bundle, pickup items from bundle
+	pickup_all_into_bundle: pickup all into bundle, pickup all items into bundle
+	pickup_some_into_bundle: pickup some into bundle, pickup some items into bundle
+	place_from_bundle: place from bundle, place items from bundle
+	place_all_into_bundle: place all into bundle, place all items into bundle
+	place_some_into_bundle: place some into bundle, place some items into bundle
+
+# -- Inventory Click Types --
+click types:
+	left: left mouse button, left mouse, LMB
+	shift_left: left mouse button with shift, left mouse with shift, Shift+LMB
+	right: right mouse button, right mouse, RMB
+	shift_right: right mouse button with shift, right mouse with shift, Shift+RMB
+	window_border_left: window border using right mouse button, window border using right mouse, border using LMB
+	window_border_right: window border using left mouse button, window border using right mouse, border using RMB
+	middle: middle mouse button, middle mouse, MMB
+	number_key: number key, 0-9
+	double_click: double click using mouse, double click
+	drop: drop key, drop item, Q
+	control_drop: drop key with control, drop stack, Ctrl+Q
+	creative: creative action
+	unknown: unknown, unsupported, custom
+	swap_offhand: swap offhand, swap shield
+
+# -- Inventory Types --
+inventory types:
+	chest: chest inventory @a
+	dispenser: dispenser inventory @a
+	dropper: dropper inventory @a
+	furnace: furnace inventory @a
+	workbench: workbench inventory @a
+	crafting: crafting table inventory @a
+	enchanting: enchanting table inventory @an
+	brewing: brewing stand inventory @a
+	player: player inventory @a
+	creative: creative inventory @a
+	merchant: merchant inventory @a, villager inventory @a
+	ender_chest: ender chest inventory @an
+	anvil: anvil inventory @an
+	beacon: beacon inventory @a
+	hopper: hopper inventory @a
+	shulker_box: shulker box inventory @a
+	barrel: barrel inventory @a
+	blast_furnace: blast furnace inventory @a
+	lectern: lectern inventory @a
+	smoker: smoker inventory @a
+	loom: loom inventory @a
+	cartography: cartography table inventory @a
+	grindstone: grindstone inventory @a
+	stonecutter: stonecutter inventory @a
+	smithing: smithing inventory @a
+	composter: composter inventory @a
+	chiseled_bookshelf: chiseled bookshelf inventory @a, bookshelf inventory @a
+	decorated_pot: decorated pot inventory @a
+	crafter: crafter inventory @a
+	shelf: shelf inventory @a
+
+	jukebox: jukebox @a
+	# The smithing new table is required for Skript to work, but this is a draft API for 1.20
+	smithing_new: new smithing table @a, upgrade gear @a, upgrade gear table @a
+
+# -- Spawn Reasons --
+spawn reasons:
+	bed: bed
+	beehive: beehive
+	breeding: breed, breeding
+	bucket: release from bucket # 'bucket' alone is problematic
+	build_irongolem: built iron golem, build iron golem
+	build_snowman: built snowman, build snowman
+	build_wither: built wither, build wither
+	chunk_gen: chunk generation
+	command: command
+	cured: cured
+	custom: customized, customised, custom
+	default: default
+	dispense_egg: dispense egg, dispensing egg
+	drowned: drowned
+	duplication: duplication
+	egg: egg
+	ender_pearl: ender pearl
+	explosion: explosion
+	frozen: frozen
+	infection: infection, infected
+	jockey: jockey
+	lightning: lightning
+	metamorphosis: metamorphosis
+	mount: mount
+	natural: natural
+	nether_portal: nether portal
+	ocelot_baby: ocelot baby
+	ominous_item_spawner: ominous item spawner
+	patrol: patrol
+	piglin_zombified: piglin zombification
+	potion_effect: potion effect
+	raid: raid
+	reinforcements: reinforcements
+	sheared: shear, sheared
+	shoulder_entity: perching, shoulder
+	silverfish_block: silverfish reveal, silverfish trap
+	slime_split: slime split
+	spawner: mob spawner, creature spawner, spawner
+	spawner_egg: spawn egg
+	spell: spell
+	trap: trap
+	village_defense: village defense, golem defense, iron golem defense
+	village_invasion: village invasion, village invading
+	# 1.21
+	trial_spawner: trial spawner, trial mob spawner, trial creature spawner
+	enchantment: enchantment
+	rehydration: rehydration, rehydrated
+	build_coppergolem: build copper golem, built copper golem
+
+# -- Respawn Reasons --
+respawn reasons:
+	death: death
+	end_portal: end portal
+	plugin: plugin
+
+# -- Difficulties --
+difficulties:
+	easy: easy
+	normal: medium, normal
+	hard: hard
+	peaceful: peaceful
+
+# -- Firework types --
+firework types:
+	ball_large: large ball, ball large, large
+	creeper: creeper, creeper face
+	ball: ball, small, small ball
+	star: star, star shaped
+	burst: burst
+
+# -- Resource Pack States --
+resource pack states:
+	accepted: accept, accepted
+	declined: decline, refuse, reject, declined, refused, rejected
+	failed_download: download fail, fail, failed to download, failed
+	successfully_loaded: successfully load, successfully install, success, successfully loaded, successfully installed
+	downloaded: downloaded
+	invalid_url: invalid url
+	failed_reload: failed reload, failed to reload
+	discarded: discarded
+
+# -- Sound Categories --
+sound categories:
+	ambient: ambient category, environment category
+	blocks: block category, blocks category
+	hostile: hostile category, hostile creature category, hostile creatures category, hostile mob category, hostile mobs category
+	master: master category, master volume category
+	music: music category
+	neutral: neutral category, friendly creature category, friendly creatures category, friendly mob category, friendly mobs category
+	players: player category, players category
+	records: record category, records category, jukebox category, jukeboxes category, noteblock category, noteblocks category, note block category, note blocks category
+	voice: voice category, speech category
+	weather: weather category
+	ui: ui, user interface
+
+# -- Panda Genes --
+genes:
+	normal: normal
+	lazy: lazy
+	worried: worried, worrisome
+	playful: playful, happy
+	brown: brown, brownish
+	weak: weak
+	aggressive: aggressive, savage, wild
+
+# -- Attribute Types --
+attribute types:
+	# Enum variation
+	generic_armor: generic armor, armor, generic armour, armour
+	generic_armor_toughness: generic armor toughness, armor toughness, generic armour toughness, armour toughness
+	generic_attack_damage: generic attack damage, attack damage
+	generic_attack_knockback: generic attack knockback, attack knockback
+	generic_attack_speed: generic attack speed, attack speed
+	generic_burning_time: generic burning time, burning time
+	generic_explosion_knockback_resistance: generic explosion knockback resistance, explosion knockback resistance
+	generic_flying_speed: generic flying speed, flying speed
+	generic_follow_range: generic follow range, follow range
+	generic_gravity: generic gravity, gravity
+	generic_jump_strength: generic jump strength, jump strength
+	generic_knockback_resistance: generic knockback resistance, knockback resistance
+	generic_luck: generic luck, luck
+	generic_max_absorption: generic max absorption, max absorption
+	generic_max_health: generic max health, max health
+	generic_movement_efficiency: generic movement efficiency, movement efficiency
+	generic_movement_speed: generic movement speed, movement speed
+	generic_oxygen_bonus: generic oxygen bonus, oxygen bonus
+	generic_safe_fall_distance: generic safe fall distance, safe fall distance
+	generic_fall_damage_multiplier: generic fall damage multiplier, fall damage multiplier
+	generic_scale: generic scale, scale
+	generic_step_height: generic step height, step height
+	generic_water_movement_efficiency: generic water movement efficiency, water movement efficiency
+	horse_jump_strength: horse jump strength
+	player_block_break_speed: player block break speed, block break speed
+	player_block_interaction_range: player block interaction range, block interaction range
+	player_entity_interaction_range: player entity interaction range, entity interaction range
+	player_mining_efficiency: player mining efficiency, mining efficiency
+	player_sneaking_speed: player sneaking speed, sneaking speed
+	player_submerged_mining_speed: player submerged mining speed, submerged mining speed
+	player_sweeping_damage_ratio: player sweeping damage ratio, sweeping damage ratio
+	zombie_spawn_reinforcements: zombie spawn reinforcements
+	# Registry variation (minecraft keys)
+	generic.armor: generic armor, armor, generic armour, armour
+	generic.armor_toughness: generic armor toughness, armor toughness, generic armour toughness, armour toughness
+	generic.attack_damage: generic attack damage, attack damage
+	generic.attack_knockback: generic attack knockback, attack knockback
+	generic.attack_speed: generic attack speed, attack speed
+	generic.burning_time: generic burning time, burning time
+	generic.explosion_knockback_resistance: generic explosion knockback resistance, explosion knockback resistance
+	generic.flying_speed: generic flying speed, flying speed
+	generic.follow_range: generic follow range, follow range
+	generic.gravity: generic gravity, gravity
+	generic.jump_strength: generic jump strength, jump strength
+	generic.knockback_resistance: generic knockback resistance, knockback resistance
+	generic.luck: generic luck, luck
+	generic.max_absorption: generic max absorption, max absorption
+	generic.max_health: generic max health, max health
+	generic.movement_efficiency: generic movement efficiency, movement efficiency
+	generic.movement_speed: generic movement speed, movement speed
+	generic.oxygen_bonus: generic oxygen bonus, oxygen bonus
+	generic.safe_fall_distance: generic safe fall distance, safe fall distance
+	generic.fall_damage_multiplier: generic fall damage multiplier, fall damage multiplier
+	generic.scale: generic scale, scale
+	generic.step_height: generic step height, step height
+	generic.water_movement_efficiency: generic water movement efficiency, water movement efficiency
+	horse.jump_strength: horse jump strength
+	player.block_break_speed: player block break speed, block break speed
+	player.block_interaction_range: player block interaction range, block interaction range
+	player.entity_interaction_range: player entity interaction range, entity interaction range
+	player.mining_efficiency: player mining efficiency, mining efficiency
+	player.sneaking_speed: player sneaking speed, sneaking speed
+	player.submerged_mining_speed: player submerged mining speed, submerged mining speed
+	player.sweeping_damage_ratio: player sweeping damage ratio, sweeping damage ratio
+	zombie.spawn_reinforcements: zombie spawn reinforcements
+	# 1.21.3 removes prefixes, adds tempt range
+	armor: generic armor, armor, generic armour, armour
+	armor_toughness: generic armor toughness, armor toughness, generic armour toughness, armour toughness
+	attack_damage: generic attack damage, attack damage
+	attack_knockback: generic attack knockback, attack knockback
+	attack_speed: generic attack speed, attack speed
+	burning_time: generic burning time, burning time
+	explosion_knockback_resistance: generic explosion knockback resistance, explosion knockback resistance
+	flying_speed: generic flying speed, flying speed
+	follow_range: generic follow range, follow range
+	gravity: generic gravity, gravity
+	jump_strength: generic jump strength, jump strength, horse jump strength
+	knockback_resistance: generic knockback resistance, knockback resistance
+	luck: generic luck, luck
+	max_absorption: generic max absorption, max absorption
+	max_health: generic max health, max health
+	movement_efficiency: generic movement efficiency, movement efficiency
+	movement_speed: generic movement speed, movement speed
+	oxygen_bonus: generic oxygen bonus, oxygen bonus
+	safe_fall_distance: generic safe fall distance, safe fall distance
+	fall_damage_multiplier: generic fall damage multiplier, fall damage multiplier
+	scale: generic scale, scale
+	step_height: generic step height, step height
+	tempt_range: generic tempt range, tempt range
+	water_movement_efficiency: generic water movement efficiency, water movement efficiency
+	block_break_speed: player block break speed, block break speed
+	block_interaction_range: player block interaction range, block interaction range
+	entity_interaction_range: player entity interaction range, entity interaction range
+	mining_efficiency: player mining efficiency, mining efficiency
+	sneaking_speed: player sneaking speed, sneaking speed
+	submerged_mining_speed: player submerged mining speed, submerged mining speed
+	sweeping_damage_ratio: player sweeping damage ratio, sweeping damage ratio
+	spawn_reinforcements: zombie spawn reinforcements
+	camera_distance: camera distance
+	waypoint_transmit_range: waypoint transmit range
+	waypoint_receive_range: waypoint receive range
+
+# -- Environments --
+environments:
+	normal: normal, overworld, the overworld
+	nether: nether, the nether
+	the_end: end, the end
+	custom: custom
+
+# -- Potion Causes --
+potion causes:
+	area_effect_cloud: enter area effect cloud
+	arrow: arrow infliction
+	attack: attack
+	axolotl: axolotl
+	warden: warden
+	beacon: beacon effect
+	command: command
+	conduit: conduit effect
+	conversion: conversion, converted
+	death: death
+	dolphin: dolphin boost
+	expiration: expiration, expired
+	food: food
+	illusion: illusion
+	milk: drinking milk
+	plugin: plugin
+	potion_drink: potion drunk, drinking potion
+	potion_splash: potion splash, splash potion
+	spider_spawn: spider spawn, spawned spider
+	totem: removal by resurrection
+	turtle_helmet: turtle helmet effect
+	unknown: unknown
+	villager_trade: villager trade
+	patrol_captain: pillager captain, patrol captain
+	wither_rose: wither rose infliction
+
+# -- Potion Actions --
+potion actions:
+	added: added, add
+	changed: changed, change
+	cleared: cleared, clear
+	removed: removed, remove, removal
+
+# -- Moon Phases --
+moon phases:
+	first_quarter: first quarter
+	full_moon: full moon
+	last_quarter: last quarter
+	new_moon: new moon
+	waning_crescent: waning crescent
+	waning_gibbous: waning gibbous
+	waxing_crescent: waxing crescent
+	waxing_gibbous: waxing gibbous
+
+# -- Quit Reasons --
+quit reasons:
+	disconnected: disconnected, quit
+	erroneous_state: erroneous, erroneous state
+	kicked: kicked
+	timed_out: timed out
+
+# -- Transform Reasons --
+transform reasons:
+	cured: zombie cure, zombie curing, curing
+	drowned: entity drowning, drowning, zombie converting to drowned, zombie drowning
+	frozen: entity freezing, entity freeze, skeleton freezing, skeleton freeze, skeleton converting to stray
+	lightning: lightning, creeper super charge
+	metamorphosis: tadpole converting, tadpole converting to frog, tadpole metamorphosis, metamorphosis
+	piglin_zombified: piglin zombification
+	sheared: mooshroom shear, mooshroom shearing
+	split: slime split, slime splitting, split, magma slime split, magma slime splitting
+	unknown: unknown
+	infection: infection, villager infection
+
+# -- Game Effects --
+# all patterns should include the word 'effect'
+game effect:
+	click1: dispenser click sound effect
+	click2: menu click sound effect, gui click sound effect
+	bow_fire: fire bow sound effect, shoot bow sound effect
+	extinguish: extinguish fire sound effect, extinguish sound effect
+	ghast_shriek: ghast shriek sound effect
+	ghast_shoot: ghast shoot sound effect
+	blaze_shoot: blaze shoot sound effect
+	zombie_chew_wooden_door: zombie chewing on wooden door sound effect, zombie attacking wooden door sound effect
+	zombie_chew_iron_door: zombie chewing on iron door sound effect, zombie attacking iron door sound effect
+	zombie_destroy_door: zombie destroy door sound effect, zombie destroying door sound effect
+	ender_signal: ender eye break effect, eye of ender break effect
+	mobspawner_flames: mob spawner flames effect, spawner flames effect
+	brewing_stand_brew: brewing sound effect
+	chorus_flower_grow: chorus flower growing sound effect
+	chorus_flower_death: chorus flower death sound effect
+	portal_travel: nether portal travel sound effect
+	endereye_launch: ender eye launch sound effect, eye of ender launch sound effect
+	firework_shoot: dispenser shoot sound effect
+	dragon_breath: dragon breath effect, dragon's breath effect
+	anvil_break: break anvil sound effect
+	anvil_use: use anvil sound effect
+	anvil_land: anvil land sound effect
+	enderdragon_shoot: ender dragon shoot sound effect, dragon shoot sound effect
+	enderdragon_growl: ender dragon growl sound effect, dragon growl sound effect
+	wither_break_block: wither breaking block sound effect
+	wither_shoot: wither shoot sound effect
+	zombie_infect: zombie infection sound effect
+	zombie_converted_villager: zombie converting villager sound effect
+	zombie_converted_to_drowned: zombie converting to drowned sound effect
+	zombie_converts_to_drowned: zombie converting to drowned sound effect
+	husk_converted_to_zombie: husk converting to zombie sound effect
+	husk_converts_to_zombie: husk converting to zombie sound effect
+	skeleton_converted_to_stray: skeleton converting to stray sound effect
+	bat_takeoff: bat take off sound effect
+	end_gateway_spawn: end gateway spawn effect
+	phantom_bite: phantom bite sound effect
+	phantom_bites: phantom bites sound effect
+	grindstone_use: use grindstone sound effect
+	grindstone_used: used grindstone sound effect
+	book_page_turn: turn page sound effect
+	book_page_turned: turned page sound effect
+	smithing_table_use: use smithing table sound effect
+	pointed_dripstone_drip_lava_into_cauldron: lava dripping into cauldron sound effect
+	pointed_dripstone_drip_water_into_cauldron: water dripping into cauldron sound effect
+	dripping_dripstone: water dripping sound effect, lava dripping sound effect
+	lava_interact: lava interaction effect
+	lava_converts_block: lava converts block effect
+	redstone_torch_burnout: redstone torch burnout effect
+	redstone_torch_burns_out: redstone torch burns out effect
+	end_portal_frame_fill: fill end portal frame effect
+	ender_eye_placed: ender eye placed effect, eye of ender placed effect
+	ender_dragon_destroy_block: ender dragon breaking block effect, dragon breaking block effect
+	ender_dragon_destroys_block: ender dragon destroys block effect, dragon destroys block effect
+	sponge_dry: sponge dry out effect
+	copper_wax_on: apply wax effect
+	copper_wax_off: remove wax effect
+	oxidised_copper_scrape: scrape oxidised copper effect
+	wither_spawned: spawn wither sound effect
+	ender_dragon_death: ender dragon death sound effect, dragon death sound effect
+	end_portal_created_in_overworld: complete end portal sound effect, create end portal sound effect
+	composter_composts: composter compost effect
+	pointed_dripstone_land: pointed dripstone land effect
+	sound_stop_jukebox_song: stop jukebox song sound effect
+	crafter_craft: crafter craft sound effect
+	crafter_fail: crafter fail sound effect
+	particles_egg_crack: egg crack effect
+	gust_dust: gust dust effect
+	trial_spawner_eject_item: trial spawner eject item effect
+	vault_eject_item: vault eject item effect
+	spawn_cobweb: spawn cobweb effect
+	sound_with_charge_shot: charge shot sound effect
+
+	 # these effects are deprecated in 1.19, they do nothing.
+	 # their respective Sounds should be used instead.
+	door_toggle: toggle door sound effect
+	iron_door_toggle: toggle iron door sound effect
+	trapdoor_toggle: toggle trapdoor sound effect
+	iron_trapdoor_toggle: toggle iron trapdoor sound effect
+	fence_gate_toggle: toggle fence gate sound effect
+	door_close: close door sound effect
+	iron_door_close: close iron door sound effect
+	trapdoor_close: close trapdoor sound effect
+	iron_trapdoor_close: close iron trapdoor sound effect
+	fence_gate_close: close fence gate sound effect
+
+	# these effects require data and can't be parsed directly, but exist here in case skript needs a proper name.
+	record_play: play record effect
+	smoke: dispenser black smoke effect
+	step_sound: footstep sound effect
+	potion_break: splash potion break effect
+	instant_potion_break: instant splash potion break effect
+	villager_plant_grow: villager grow plant effect
+	composter_fill_attempt: composting fill effect
+	bone_meal_use: bone meal use effect
+	electric_spark: electric spark effect
+	shoot_white_smoke: dispenser white smoke effect
+	bee_growth: bee grow plant effect
+	turtle_egg_placement: place turtle egg effect
+	smash_attack: mace smash attack effect
+	particles_sculk_charge: sculk charge effect
+	particles_sculk_shriek: sculk shriek effect
+	particles_and_sound_brush_block_complete: brush block effect
+	trial_spawner_spawn: trial spawner spawn effect
+	trial_spawner_spawn_mob_at: trial spawner spawn mob effect
+	trial_spawner_detect_player: trial spawner detect player effect
+	vault_activate: vault activate effect
+	vault_deactivate: vault deactivate effect
+	trial_spawner_detect_player_ominous: ominous trial spawner detect player effect
+	trial_spawner_become_ominous: trial spawner become ominous effect
+	trial_spawner_spawn_item: trial spawner spawn item effect
+
+# -- Entity Effects --
+# all patterns should include the word 'effect' or 'animation'
+# 'effect' should be used for particles, 'sound effect' for sounds, 'animation' for model animations
+entity effect:
+	arrow_particles: tipped arrow particles effect
+	rabbit_jump: rabbit jump animation
+	reset_spawner_minecart_delay: reset spawner minecart delay effect
+
+	# death was superseded by entity_death 1.12.2
+	death: death animation
+	entity_death: death animation
+
+	egg_break: egg break effect
+	snowball_break: snowball break effect
+	projectile_crack: projectile crack effect
+	fang_attack: evoker fang attack animation
+	hoglin_attack: hoglin attack animation
+	iron_golen_attack: iron golem attack animation
+	ravager_attack: ravager attack animation
+	ravager_roared: ravager roared effect
+	warden_attack: warden attack animation
+	zoglin_attack: zoglin attack animation
+	entity_attack: entity attack animation
+
+	# wolf effects superseded by taming effects 1.21
+	wolf_smoke: taming failed effect
+	wolf_hearts: taming succeeded effect
+	taming_failed: taming failed effect
+	taming_succeeded: taming succeeded effect
+
+	trusting_failed: ocelot distrust effect
+	trusting_succeeded: ocelot trust effect
+	wolf_shake: wolf shake animation
+	wolf_shake_stop: stop wolf shake animation
+	tnt_minecart_ignite: ignite tnt minecart animation
+	iron_golem_rose: iron golem rose animation
+	iron_golem_sheath: iron golem sheath animation
+	villager_heart: villager heart effect
+	villager_angry: villager angry effect
+	villager_happy: villager happy effect
+	witch_magic: witch magic effect
+	zombie_transform: zombie transform sound effect
+	firework_explode: firework explode animation
+	love_hearts: love hearts effect
+	squid_rotate: squid rotation reset
+	entity_poof: entity poof effect
+	shield_block: shield block sound effect
+	shield_break: shield break sound effect
+	armor_stand_hit: armor stand hit effect
+	dolphin_fed: fed dolphin effect
+	ravager_stunned: stunned ravager effect
+	villager_splash: villager sweat effect
+	player_bad_omen_raid: player bad omen raid effect # pre 1.20.5
+	fox_chew: fox chew effect
+	teleport_ender: ender teleport effect
+	break_equipment_main_hand: break main hand effect
+	break_equipment_off_hand: break off hand effect
+	break_equipment_helmet: break helmet effect
+	break_equipment_chestplate: break chestplate effect
+	break_equipment_leggings: break leggings effect
+	break_equipment_boots: break boots effect
+	break_equipment_saddle: break saddle effect
+	body_break: break body armor effect, break body armour effect
+	break_equipment_body: break body armor effect, break body armour effect
+	honey_block_slide_particles: honey block slide effect
+	honey_block_fall_particles: honey block fall effect
+	swap_hand_items: swap hands effect # this actually makes players swap hands
+	goat_lower_head: goat lowering head animation
+	goat_raise_head: goat raising head animation
+	spawn_death_smoke: spawn in smoke effect
+	warden_tendril_shake: warden tendril shake animation
+	warden_sonic_attack: warden sonic attack animation
+	sniffer_dig: sniffer dig sound effect # only if the sniffer is already in search/dig state
+	armadillo_peek: armadillo peek animation
+	shake: creaking shake animation
+	
+	
+	hurt_drown: drown damage effect
+	drown_particles: drowning damage effect
+
+	# sheep eat superseded by sheep eat grass 1.12.2
+	sheep_eat: sheep eating grass animation
+	sheep_eat_grass: sheep eating grass animation
+
+	# identical
+	totem_resurrect: protected from death effect
+	protected_from_death: protected from death effect
+
+	# non-functional
+	guardian_target: guardian target sound effect (non-functional)
+	thorns_hurt: thorns hurt effect (non-functional)
+	hurt: damage animation (non-functional)
+	hurt_explosion: explosion damage effect (non-functional)
+	hurt_berry_bush: hurt berry bush effect (non-functional)
+	cat_tame_fail: cat tame fail effect (non-functional)
+	cat_tame_success: cat tame success effect (non-functional)
+
+# -- Particle Effects --
+# all patterns should include the word 'particle'
+particle:
+	angry_villager: angry villager particle¦s @an
+	ash: ash particle¦s @an
+	block: block particle¦s @a
+	block_crumble: block crumble particle¦s @a
+	block_marker: block marker particle¦s @a
+	bubble: bubble particle¦s @a
+	bubble_column_up: bubble column particle¦s @a
+	bubble_pop: bubble pop particle¦s @a
+	campfire_cosy_smoke: campfire cosy smoke particle¦s @a
+	campfire_signal_smoke: campfire signal smoke particle¦s @a
+	cherry_leaves: cherry leaves particle¦s @a
+	cloud: cloud particle¦s @a
+	composter: composter particle¦s @a
+	copper_fire_flame: copper flame particle¦s @a
+	crimson_spore: crimson spore particle¦s @a
+	crit: crit particle¦s @a
+	current_down: downward current particle¦s @a
+	damage_indicator: damage indicator particle¦s @a
+	dolphin: dolphin particle¦s @a
+	dragon_breath: dragon breath particle¦s @a
+	dripping_dripstone_lava: dripstone dripping lava particle¦s @a
+	dripping_dripstone_water: dripstone dripping water particle¦s @a
+	dripping_honey: dripping honey particle¦s @a
+	dripping_lava: dripping lava particle¦s @a
+	dripping_obsidian_tear: dripping obsidian tear particle¦s @a
+	dripping_water: dripping water particle¦s @a
+	dust: dust particle¦s @a
+	dust_color_transition: dust color transition particle¦s @a
+	dust_pillar: dust pillar particle¦s @a
+	dust_plume: dust plume particle¦s @a
+	effect: potion effect particle¦s @an
+	egg_crack: egg crack particle¦s @an
+	elder_guardian: elder guardian particle¦s @an
+	electric_spark: electric spark particle¦s @an
+	enchant: enchanting particle¦s @an
+	enchanted_hit: enchanted hit particle¦s @an
+	end_rod: end rod particle¦s @an
+	entity_effect: entity effect particle¦s @an
+	explosion: explosion particle¦s @an
+	explosion_emitter: explosion emitter particle¦s @an
+	falling_dripstone_lava: falling dripstone lava particle¦s @a
+	falling_dripstone_water: falling dripstone water particle¦s @a
+	falling_dust: falling dust particle¦s @a
+	falling_honey: falling honey particle¦s @a
+	falling_lava: falling lava particle¦s @a
+	falling_nectar: falling nectar particle¦s @a
+	falling_obsidian_tear: falling obsidian tear particle¦s @a
+	falling_spore_blossom: falling spore blossom particle¦s @a
+	falling_water: falling water particle¦s @a
+	firefly: firefly particle¦s @a
+	firework: firework particle¦s @a
+	fishing: fishing particle¦s @a
+	flame: flame particle¦s @a
+	flash: flash particle¦s @a
+	glow: glow particle¦s @a
+	glow_squid_ink: glow squid ink particle¦s @a
+	gust: gust particle¦s @a
+	gust_emitter_large: large gust emitter particle¦s @a
+	gust_emitter_small: small gust emitter particle¦s @a
+	happy_villager: happy villager particle¦s @a
+	heart: heart particle¦s @a
+	infested: infested particle¦s @an
+	instant_effect: instant effect particle¦s @an
+	item: item particle¦s @an
+	item_cobweb: cobweb item particle¦s @an
+	item_slime: slime item particle¦s @an
+	item_snowball: snowball item particle¦s @an
+	landing_honey: landing honey particle¦s @a
+	landing_lava: landing lava particle¦s @a
+	landing_obsidian_tear: landing obsidian tear particle¦s @a
+	large_smoke: large smoke particle¦s @a
+	lava: lava particle¦s @a
+	mycelium: mycelium particle¦s @a
+	nautilus: nautilus particle¦s @a
+	note: note particle¦s @a
+	ominous_spawning: ominous spawning particle¦s @an
+	pale_oak_leaves: pale oak leaves particle¦s @a
+	poof: poof particle¦s @a
+	portal: portal particle¦s @a
+	raid_omen: raid omen particle¦s @a
+	rain: rain particle¦s @a
+	reverse_portal: reverse portal particle¦s @a
+	scrape: scrape particle¦s @a
+	sculk_charge: sculk charge particle¦s @a
+	sculk_charge_pop: sculk charge pop particle¦s @a
+	sculk_soul: sculk soul particle¦s @a
+	shriek: shriek particle¦s @a
+	small_flame: small flame particle¦s @a
+	small_gust: small gust particle¦s @a
+	smoke: smoke particle¦s @a
+	sneeze: sneeze particle¦s @a
+	snowflake: snowflake particle¦s @a
+	sonic_boom: sonic boom particle¦s @a
+	soul: soul particle¦s @a
+	soul_fire_flame: soul fire flame particle¦s @a
+	spit: spit particle¦s @a
+	splash: splash particle¦s @a
+	spore_blossom_air: spore blossom air particle¦s @a
+	squid_ink: squid ink particle¦s @a
+	sweep_attack: sweep attack particle¦s @a
+	tinted_leaves: tinted leaves particle¦s @a
+	totem_of_undying: totem of undying particle¦s @a
+	trail: trail particle¦s @a
+	trial_omen: trial omen particle¦s @a
+	trial_spawner_detection: trial spawner detection particle¦s @a
+	trial_spawner_detection_ominous: ominous trial spawner detection particle¦s @a
+	underwater: underwater particle¦s @a
+	vault_connection: vault connection particle¦s @a
+	vibration: vibration particle¦s @a
+	warped_spore: warped spore particle¦s @a
+	wax_off: wax off particle¦s @a
+	wax_on: wax on particle¦s @a
+	white_ash: white ash particle¦s @a
+	white_smoke: white smoke particle¦s @a
+	witch: witch particle¦s @a
+
+
+# -- Teleport Flags --
+teleport flags:
+	retain_open_inventory: opened inventory, open inventory, inventory
+	retain_passengers: passengers, passenger
+	retain_vehicle: vehicle
+	retain_direction: directional velocity, pitch and yaw velocity, yaw and pitch velocity
+	retain_pitch: pitch velocity
+	retain_yaw: yaw velocity
+	retain_movement: xyz velocity
+	retain_x: x velocity
+	retain_y: y velocity
+	retain_z: z velocity
+
+# -- Unleash Reasons --
+unleash reasons:
+	distance: distance
+	holder_gone: holder (gone|disappeared)
+	player_unleash: player unleash, player unleashed, unleashed by player
+	unknown: unknown
+
+# -- Item Flags --
+item flags:
+	hide_additional_tooltip: hide additional tooltip, additional tooltip hidden, hidden additional tooltip
+	hide_armor_trim: hide armor trim, armor trim hidden, hidden armor trim, hide armour trim, armour trim hidden, hidden armour trim
+	hide_attributes: hide attributes, attributes hidden, hidden attributes
+	hide_destroys: hide destroys, hide destroyable blocks, hide breakable blocks, destroys hidden, hidden destroys
+	hide_dye: hide dye, hide dye color, dye hidden, dye color hidden, hidden dye, hidden dye color
+	hide_enchants: hide enchants, hide enchantments, enchants hidden, enchantments hidden, hidden enchants
+	hide_placed_on: hide placed on, placed on hidden, hidden placed on
+	hide_stored_enchants: hide stored enchants, hide stored enchantments, stored enchants hidden, stored enchantments hidden, hidden stored enchants, hidden stored enchantments
+	hide_unbreakable: hide unbreakable, hide unbreakable status, unbreakable hidden, unbreakable status hidden, hidden unbreakable, hidden unbreakable status
+	hide_potion_effects: hide potion effects, hide potions, potion effects hidden, potions hidden, hidden potion effects, hidden potions
+
+# -- Display Billboards --
+billboards:
+	center: center, middle, center pivot
+	fixed: fixed
+	horizontal: horizontal, horizontal pivot
+	vertical: vertical, vertical pivot
+
+# -- Text Display Alignments --
+text alignments:
+	center: centered, center aligned, middle aligned
+	left: left aligned
+	right: right aligned
+
+# -- Item Display Transforms --
+item display transforms:
+	firstperson_lefthand: first person left handed, first person left hand, left handed in first person
+	firstperson_righthand: first person right handed, first person right hand, right handed in first person
+	fixed: fixed, fixed position
+	ground: ground, the ground
+	gui: gui, menu
+	head: head
+	none: no transform
+	thirdperson_lefthand: third person left handed, third person left hand, left handed in third person
+	thirdperson_righthand: third person right handed, third person right hand, right handed in third person
+
+# -- Villager Types/Professions --
+villager types:
+	snow: snow
+	plains: plains
+	jungle: jungle
+	taiga: taiga
+	desert: desert
+	savanna: savanna
+	swamp: swamp
+
+villager professions:
+	# Suffix "profession" options added to help with EntityData conflicts
+	leatherworker: leatherworker, leatherworker profession
+	mason: mason, mason profession
+	fletcher: fletcher, fletcher profession
+	weaponsmith: weaponsmith, weaponsmith profession
+	toolsmith: toolsmith, toolsmith profession
+	librarian: librarian, librarian profession
+	shepherd: shepherd, shepherd profession
+	farmer: farmer, farmer profession
+	cleric: cleric, cleric profession
+	nitwit: nitwit, nitwit profession
+	cartographer: cartographer, cartographer profession
+	armorer: armorer, armorer profession, armourer, armourer profession
+	butcher: butcher, butcher profession
+	none: no profession, none profession, unemployed
+	fisherman: fisherman, fisherman profession
+
+# -- Change Reasons --
+experience cooldown change reasons:
+	plugin: plugin
+	pickup_orb: orb pickup, pickup orb
+
+# -- Banner Pattern Types --
+banner pattern types:
+	base: base banner pattern
+	border: border banner pattern, bordure banner pattern, bordure indented banner pattern
+	bricks: bricks banner pattern, field masoned banner pattern
+	circle: circle banner pattern
+	creeper: creeper banner pattern, creeper charged banner pattern
+	cross: cross banner pattern
+	curly_border: curly border banner pattern
+	diagonal_left: left diagonal banner pattern
+	diagonal_right: right diagonal banner pattern
+	diagonal_up_left: diagonal up left banner pattern
+	diagonal_up_right: diagonal up right banner pattern
+	flow: flow banner pattern
+	flower: flower banner pattern
+	globe: globe banner pattern
+	gradient: gradient banner pattern
+	gradient_up: gradient up banner pattern
+	guster: guster banner pattern
+	half_horizontal: horizontal half banner pattern
+	half_horizontal_bottom: horizontal bottom half banner pattern
+	half_vertical: vertical half banner pattern
+	half_vertical_right: right vertical half banner pattern
+	mojang: mojang banner pattern, thing banner pattern
+	piglin: piglin banner pattern, snout banner pattern
+	rhombus: rhombus banner pattern
+	skull: skull banner pattern
+	small_stripes: small stripes banner pattern
+	square_bottom_left: bottom left square banner pattern
+	square_bottom_right: bottom right square banner pattern
+	square_top_left: top left square banner pattern
+	square_top_right: top right square banner pattern
+	straight_cross: straight cross banner pattern
+	stripe_bottom: bottom stripe banner pattern
+	stripe_center: center stripe banner pattern
+	stripe_downleft: down left stripe banner pattern
+	stripe_downright: down right stripe banner pattern
+	stripe_left: left stripe banner pattern
+	stripe_middle: middle stripe banner pattern
+	stripe_right: right stripe banner pattern
+	stripe_top: top stripe banner pattern
+	triangle_bottom: bottom triangle banner pattern
+	triangle_top: top triangle banner pattern
+	triangles_bottom: tbottom triangles banner pattern
+	triangles_top: top triangles banner pattern
+	stripe_small: small stripe banner pattern
+	diagonal_left_mirror: left diagonal mirror banner pattern
+	diagonal_right_mirror: right diagonal mirror banner pattern
+	circle_middle: middle circle banner pattern
+	rhombus_middle: middle rhombus banner pattern
+	half_vertical_mirror: vertical half mirror banner pattern
+	half_horizontal_mirror: horizontal half mirror banner pattern
+
+# -- Input Keys --
+input keys:
+	forward: forward movement key, forward key
+	backward: backward movement key, backward key
+	left: left movement key, left key
+	right: right movement key, right key
+	jump: jump key, jumping key
+	sneak: sneak key, sneaking key
+	sprint: sprint key, sprinting key
+
+# -- Fishing States --
+fishing states:
+	fishing: fishing line cast, rod cast, fishing rod cast, fishing
+	caught_fish: fish caught, caught fish
+	caught_entity: entity caught, caught entity
+	in_ground: bobber in ground, in ground
+	failed_attempt: fish escape, fish escaped, failed attempt
+	reel_in: reel in
+	bite: bite, fish bite
+	lured: lured, fish lured
+
+# -- Equipment Slots --
+equipment slots:
+	head: helmet slot, helmet slots, head slot, head slots, helmet, helmets
+	chest: chestplate slot, chestplate slots, chest slot, chest slots, chestplate, chestplates
+	legs: leggings slot, leggings slots, leggings, legs slot, legs slots, legs
+	feet: feet slot, feet slots, feet, boots slot, boots slots, boots, shoes slot, shoes
+	hand: tool slot, tool slots, hand slot, hand slots, main hand slot, main hand slots, main hand, main hands
+	off_hand: off hand slot, off hand slots, off hand, off haands
+	body: body slot, body slots, body armor slot, body armor slots, body armour slot, body armour slots, body armor, body armors, body armour, body armours
+	saddle: saddle slot, saddle slots
+
+# -- Pig Variants --
+pig variants:
+	cold: cold
+	temperate: temperate
+	warm: warm
+
+# -- Chicken Variants --
+chicken variants:
+	cold: cold
+	temperate: temperate
+	warm: warm
+
+# -- Cow Variants --
+cow variants:
+	cold: cold
+	temperate: temperate
+	warm: warm
+
+# -- Frog Variants --
+frog variants:
+	cold: cold
+	temperate: temperate
+	warm: warm
+
+# -- Zombie Nautilus Variants --
+zombie nautilus variants:
+	temperate: temperate
+	warm: warm
+
+# -- Villager Career Change Reasons
+villager career change reasons:
+	employed: employment
+	losing_job: losing job
+
+# -- Damage Types --
+damage types:
+	arrow: arrow
+	bad_respawn_point: bad respawn point
+	cactus: cactus
+	campfire: campfire
+	cramming: cramming, entity cramming
+	dragon_breath: dragon breath
+	drown: drown, drowning
+	dry_out: dry out
+	ender_pearl: ender pearl
+	explosion: explosion
+	fall: fall
+	falling_anvil: falling anvil
+	falling_block: falling block
+	falling_stalactite: falling stalactite
+	fireball: fireball
+	fireworks: fireworks
+	fly_into_wall: fly into wall
+	freeze: freeze
+	generic: generic
+	generic_kill: generic kill
+	hot_floor: hot floor
+	in_fire: in fire
+	in_wall: in wall, suffocation
+	indirect_magic: indirect magic
+	lava: lava
+	lightning_bolt: lightning, lightning bolt
+	mace_smash: mace smash
+	magic: magic
+	mob_attack: mob attack
+	mob_attack_no_aggro: mob attack no aggro
+	mob_projectile: mob projectile
+	on_fire: on fire
+	out_of_world: out of world, void
+	outside_border: outside border
+	player_attack: player attack
+	player_explosion: player explosion
+	sonic_boom: sonic boom
+	spit: spit, llama spit
+	stalagmite: stalagmite
+	starve: starve
+	sting: sting
+	sweet_berry_bush: sweet berry bush
+	thorns: thorns
+	thrown: thrown
+	trident: trident
+	unattributed_fireball: unattributed fireball
+	wind_charge: wind charge
+	wither: wither
+	wither_skull: wither skull
+
+# -- Boolean --
+boolean:
+	true:
+		name: true
+		pattern: (true|yes|on)
+	false:
+		name: false
+		pattern: (false|no|off)
+
+# -- Operators --
+operators:
+	add: addition
+	subtract: subtraction
+	multiply: multiplication
+	divide: division
+	exponentiate: exponentiation
+
+# -- Verbosity --
+verbosity:
+	low: low
+	normal: normal
+	high: high
+	very_high: very high
+	debug: debug
+
+# -- Types --
+types:
+	# Java
+	object: object¦s @an
+	number: number¦s @a
+	integer: integer¦s @an
+	long: integer¦s @an
+	short: integer¦s @an
+	byte: integer¦s @an
+	double: number¦s @a
+	float: number¦s @a
+	boolean: boolean¦ (yes/no)¦s (yes/no) @a
+	string: text¦s @a
+	chunk: chunk¦s @a
+	uuid: uuid¦s @a
+
+	# Bukkit
+	entity: entit¦y¦ies @an
+	livingentity: living entit¦y¦ies @a
+	projectile: projectile¦s @a
+	block: block¦s @a
+	location: location¦s @a
+	world: world¦s @a
+	worldborder: worldborder¦s @a
+	inventory: inventor¦y¦ies @an
+	player: player¦s @a
+	offlineplayer: offline player¦s @an
+	commandsender: command sender¦s @a
+	inventoryholder: inventory holder¦s @an
+	gamemode: gamemode¦s @a
+	material: material¦s @a
+	itemstack: item stack¦s @an
+	itementity: dropped item¦s @a # same as entities.dropped item.name
+	itemflag: item flag¦s @an
+	biome: biome¦s @a
+	potioneffecttype: potion effect type¦s @a
+	potioneffecttypecategory: potion effect type categor¦y¦ies @a
+	potioneffect: potion effect¦s @a
+	skriptpotioneffect: potion effect¦s @a
+	potioncause: potion cause¦s @an
+	potionaction: potion action¦s @an
+	enchantment: enchantment¦s @an
+	damagecause: damage cause¦s @a
+	teleportcause: teleport cause¦s @a
+	inventoryaction: inventory action¦s @an
+	clicktype: click type¦s @a
+	vector: vector¦s @a
+	inventorytype: inventory type¦s @an
+	metadataholder: metadata holder¦s @a
+	spawnreason: spawn reason¦s @a
+	respawnreason: respawn reason¦s @a
+	cachedservericon: server icon¦s @a
+	difficulty: difficult¦y¦ies @a
+	fireworkeffect: firework effect¦s @a
+	fireworktype: firework type¦s @a
+	soundcategory: sound categor¦y¦ies @a
+	blockdata: block data¦s @a
+	healreason: heal reason¦s @a
+	cattype: cat type¦s @a
+	wolfvariant: wolf variant¦s @a
+	gamerule: gamerule¦s @a
+	attributetype: attribute type¦s @a
+	enchantmentoffer: enchantment offer¦s @an
+	environment: environment¦s @an
+	moonphase: moonphase¦s @a
+	resourcepackstate: resource pack state¦s @a
+	gene: panda gene¦s @a
+	gamerulevalue: gamerule value¦s @a
+	quitreason: quit reason¦s @a
+	inventoryclosereason: inventory close reason¦s @an
+	transformreason: transform reason¦s @a
+	unleashreason: unleash reason¦s @an
+	teleportflag: teleport flag¦s @a
+	display: display¦s @a
+	billboard: billboard¦s @a
+	textalignment: text alignment¦s @a
+	itemdisplaytransform: item display transform¦s @an
+	minecrafttag: minecraft tag¦s @a
+	experiencecooldownchangereason: experience cooldown change reason¦s @an
+	inputkey: input key¦s @an
+	villagertype: villager type¦s @a
+	villagerprofession: villager profession¦s @a
+	entitysnapshot: entity snapshot¦s @an
+	loottable: loot table¦s @a
+	lootcontext: loot context¦s @a
+	bannerpatterntype: banner pattern type¦s @a
+	bannerpattern: banner pattern¦s @a
+	vehicle: vehicle¦s @a
+	fishingstate: fishing state¦s @a
+	equipmentslot: equipment slot¦s @an
+	pigvariant: pig variant¦s @a
+	chickenvariant: chicken variant¦s @a
+	cowvariant: cow variant¦s @a
+	villagercareerchangereason: villager career change reason¦s @a
+	damagesource: damage source¦s @a
+	damagetype: damage type¦s @a
+	frogvariant: frog variant¦s @a
+	itemcomponent: item component¦s @an
+	equippablecomponent: equippable component¦s @an
+	nameable: nameable thing¦s @a
+	gameeffect: game effect¦s @a
+	entityeffect: entity effect¦s @an
+	particle: particle¦s @a
+	convergingparticle: converging particle¦s @a
+	directionalparticle: directional particle¦s @a
+	scalableparticle: scalable particle¦s @a
+	zombienautilusvariant: zombie nautilus variant¦s @a
+
+	# Skript
+	weathertype: weather type¦s @a
+	entitytype: entity type¦s @an
+	entitydata: entity type¦s @an
+	itemtype: item type¦s @an
+	time: time¦s @a
+	timespan: time span¦s @a
+	timeperiod: time period¦s @a
+	date: date¦s @a
+	direction: direction¦s @a
+	slot: slot¦s @a
+	color: color¦s @a
+	structuretype: tree type¦s @a
+	enchantmenttype: enchantment type¦s @an
+	experience: experience point¦s @an
+	experience.pattern: (e?xp|experience( points?)?)
+	classinfo: type¦s @a
+	queue: queue¦s @a
+	script: script¦s @a
+	config: config¦s @a
+	node: node¦s @a
+	executable: executable¦s @an
+	function: function¦s @a
+	named: named thing¦s @a
+	numbered: numbered thing¦s @a
+	valued: valued thing¦s @a
+	containing: container¦s @a
+
+	# Hooks
+	money: money
+	region: region¦s
+
+	# Other
+	quaternion: quaternion¦s @a

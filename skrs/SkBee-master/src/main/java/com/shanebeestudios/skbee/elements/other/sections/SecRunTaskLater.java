@@ -1,0 +1,201 @@
+package com.shanebeestudios.skbee.elements.other.sections;
+
+import ch.njol.skript.Skript;
+import ch.njol.skript.classes.Changer.ChangeMode;
+import ch.njol.skript.config.SectionNode;
+import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
+import ch.njol.skript.doc.Name;
+import ch.njol.skript.doc.Since;
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.LoopSection;
+import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.TriggerItem;
+import ch.njol.skript.lang.Variable;
+import ch.njol.skript.lang.parser.ParserInstance;
+import ch.njol.skript.util.Timespan;
+import ch.njol.skript.variables.Variables;
+import ch.njol.util.Kleenean;
+import com.shanebeestudios.skbee.api.region.TaskUtils;
+import com.shanebeestudios.skbee.api.region.scheduler.Scheduler;
+import com.shanebeestudios.skbee.api.region.scheduler.task.Task;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+
+@Name("Task - Run Task Later")
+@Description({"Run a task later. Similar to Skript's delay effect, with the difference being everything in the",
+    "section is run later. All code after your section will keep running as normal without a delay.",
+    "This can be very useful in loops, to prevent halting the loop.",
+    "You can optionally have your task repeat until cancelled.",
+    "You can optionally run your code async/on another thread.",
+    "You can optionally store the task ID in a variable, to help make use of it later.",
+    "\nNOTE: A good chunk of Bukkit/Minecraft stuff can NOT be run async. It may throw console errors.",
+    "Please be careful when running async, this is generally reserved for heavy math/functions that could cause lag.",
+    "Simply waiting a tick, or running a new non-async section will put your code back on the main thread.",
+    "",
+    "**Patterns**:",
+    "The 2nd pattern is only of concern if you are running Folia or have Paper schedulers enabled in the config, " +
+        "otherwise just use the first pattern.",
+    "- `globally` = Will run this task on the global scheduler.",
+    "- `for %entity` = Will run this task for an entity, will follow the entity around (region wise)" +
+        "and will cancel itself when the entity is no longer valid.",
+    "- `at %location%` = Will run this task at a specific location (Use this for block changes in this section)."})
+@Examples({"on explode:",
+    "\tloop exploded blocks:",
+    "\t\tset {_loc} to location of loop-block",
+    "\t\tset {_data} to block data of loop-block",
+    "\t\trun 2 seconds later:",
+    "\t\t\tset block at {_loc} to {_data}\n",
+    "",
+    "run 0 ticks later repeating every second and store id in {_id}:",
+    "\tadd 1 to {_a}",
+    "\tif {_a} > 10:",
+    "\t\tcancel task with id {_id}",
+    "",
+    "run 0 ticks later repeating every second:",
+    "\tadd 1 to {_a}",
+    "\tif {_a} > 10:",
+    "\t\texit loop"})
+@Since("3.0.0")
+public class SecRunTaskLater extends LoopSection {
+
+    static {
+        Skript.registerSection(SecRunTaskLater.class,
+            "[:async] (run|execute) [task] %timespan% later [repeating every %-timespan%] [globally] [and store [task] id in %-object%]",
+            "[:async] (run|execute) [task] %timespan% later [repeating every %-timespan%] [(at|on|for) %-entity/location%] [and store [task] id in %-object%]");
+    }
+
+    private static Task<?> LAST_CREATED_TASK = null;
+    private static final Map<Long, Map<Event, Task<?>>> THREADED_TASK_MAP = new HashMap<>();
+    private boolean async;
+    private Expression<Timespan> timespan;
+    private Expression<?> taskObject;
+    private Expression<Timespan> repeating;
+    private Expression<Object> idStorage;
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult, SectionNode sectionNode, List<TriggerItem> triggerItems) {
+        this.async = parseResult.hasTag("async");
+        this.timespan = (Expression<Timespan>) exprs[0];
+        if (matchedPattern == 1) {
+            this.taskObject = exprs[2];
+        }
+        this.repeating = (Expression<Timespan>) exprs[1];
+        this.idStorage = (Expression<Object>) exprs[2 + matchedPattern];
+        if (this.idStorage != null && (!(this.idStorage instanceof Variable<?>))) {
+            Skript.error("The id can only be stored in a variable.");
+            return false;
+        }
+        ParserInstance parserInstance = ParserInstance.get();
+        Kleenean hasDelayBefore = parserInstance.getHasDelayBefore();
+        parserInstance.setHasDelayBefore(Kleenean.TRUE);
+        loadCode(sectionNode);
+        parserInstance.setHasDelayBefore(hasDelayBefore);
+        return true;
+    }
+
+    @Override
+    protected @Nullable TriggerItem walk(Event event) {
+        Timespan timespan = this.timespan.getSingle(event);
+        long delay = timespan != null ? timespan.getAs(Timespan.TimePeriod.TICK) : 0;
+
+        long repeat = 0;
+        if (this.repeating != null) {
+            Timespan repeatingTimespan = this.repeating.getSingle(event);
+            if (repeatingTimespan != null) repeat = repeatingTimespan.getAs(Timespan.TimePeriod.TICK);
+        }
+
+        Task<?> task;
+        AtomicReference<Task<?>> taskRef = new AtomicReference<>();
+        AtomicReference<Object> previousLocalVars = new AtomicReference<>(Variables.copyLocalVariables(event));
+        Runnable runnable = () -> {
+            assert this.first != null;
+
+            // Store task fo task ID expression
+            Map<Event, Task<?>> eventTaskMap = new HashMap<>();
+            eventTaskMap.put(event, taskRef.get());
+            THREADED_TASK_MAP.put(Thread.currentThread().threadId(), eventTaskMap);
+
+            // Set local variables and walk trigger
+            Variables.setLocalVariables(event, previousLocalVars.get());
+            TriggerItem.walk(this.first, event);
+            previousLocalVars.set(Variables.removeLocals(event));
+        };
+
+        Scheduler<?> scheduler;
+        if (this.taskObject != null) {
+            Object object = this.taskObject.getSingle(event);
+            //noinspection IfCanBeSwitch // requires java 21+
+            if (object instanceof Entity entity) scheduler = TaskUtils.getEntityScheduler(entity);
+            else if (object instanceof Location location) scheduler = TaskUtils.getRegionalScheduler(location);
+            else scheduler = TaskUtils.getGlobalScheduler();
+        } else {
+            scheduler = TaskUtils.getGlobalScheduler();
+        }
+        if (scheduler == null) return super.walk(event, false);
+
+        if (repeat > 0 && this.async) {
+            task = scheduler.runTaskTimerAsync(runnable, delay, repeat);
+        } else if (repeat > 0) {
+            task = scheduler.runTaskTimer(runnable, delay, repeat);
+        } else if (this.async) {
+            task = scheduler.runTaskLaterAsync(runnable, delay);
+        } else {
+            task = scheduler.runTaskLater(runnable, delay);
+        }
+        taskRef.set(task);
+        if (this.idStorage != null) {
+            this.idStorage.change(event, new Integer[]{task.getTaskId()}, ChangeMode.SET);
+            // Re-set the local vars since we've now changed them
+            previousLocalVars.set(Variables.copyLocalVariables(event));
+        }
+        LAST_CREATED_TASK = task;
+        if (last != null) last.setNext(null);
+        return super.walk(event, false);
+    }
+
+    public static int getCurrentTaskId(Event event) {
+        Map<Event, Task<?>> eventTaskMap = THREADED_TASK_MAP.get(Thread.currentThread().threadId());
+        Task<?> task = eventTaskMap.get(event);
+
+        if (task == null || task.isCancelled()) return -1;
+        return task.getTaskId();
+    }
+
+    public static Task<?> getLastCreatedTask() {
+        return LAST_CREATED_TASK;
+    }
+
+    @Override
+    public @NotNull String toString(@Nullable Event e, boolean d) {
+        String async = this.async ? "async " : "";
+        String type = this.taskObject != null ? (" for " + this.taskObject.toString(e, d)) : " globally";
+        String repeat = this.repeating != null ? (" repeating every " + this.repeating.toString(e, d)) : "";
+        String id = this.idStorage != null ? (" and store id in " + this.idStorage.toString(e, d)) : "";
+        return async + "run task " + this.timespan.toString(e, d) + " later" + repeat + type + id;
+    }
+
+    @Override
+    public TriggerItem getActualNext() {
+        return null;
+    }
+
+    @Override
+    public void exit(Event event) {
+        Map<Event, Task<?>> eventTaskMap = THREADED_TASK_MAP.get(Thread.currentThread().threadId());
+        Task<?> task = eventTaskMap.get(event);
+
+        if (task == null || task.isCancelled()) return;
+        task.cancel();
+    }
+
+}

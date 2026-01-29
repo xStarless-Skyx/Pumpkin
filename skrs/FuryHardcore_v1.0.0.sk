@@ -1,0 +1,530 @@
+# FuryHardcore - Hardcore System with Revivals
+# For Minecraft 1.21.11
+# Version 1.0.0 - Initial Version
+
+options:
+    prefix: &8[&cFuryHardcore&8]&r
+    default-language: en
+
+# ============================================================
+# PLAYER DATA SYSTEM
+# ============================================================
+
+variables:
+    {fhc.deaths.%text%} = 0
+    {fhc.banned.%text%} = false
+    {fhc.revive.confirmation.%player%} = ""
+    {fhc.revive.time.%player%} = 0
+    {fhc.player.uuid.%text%} = ""
+    {fhc.player.name.%text%} = ""
+    {fhc.registered.players::*} = ""
+    {fhc.player.language.%text%} = "en"
+
+# ============================================================
+# LANGUAGE MESSAGES
+# ============================================================
+
+on load:
+    # English Messages
+    set {fhc.lang.en.death} to "&cYou have died for the &e[DEATHS]&c time and have been banned for &e[DAYS] days&c."
+    set {fhc.lang.en.can-be-revived} to "&aYou can be revived if another player uses: &e/revive [NAME]"
+    set {fhc.lang.en.items-needed} to "&aItems needed: &e[ITEMS]"
+    set {fhc.lang.en.death-broadcast} to "&e[NAME] &chas died and been banned for &e[DAYS] days&c. Someone can revive them with: &e/revive [NAME]"
+    set {fhc.lang.en.no-permission} to "&cYou don't have permission to use this command."
+    set {fhc.lang.en.usage-revive} to "&cCorrect usage: &e/revive <player>"
+    set {fhc.lang.en.player-unknown} to "&cI don't know this player. Make sure to spell the name correctly."
+    set {fhc.lang.en.player-never-joined} to "&7Tip: The player must have joined the server at least once."
+    set {fhc.lang.en.cannot-revive-self} to "&cYou cannot revive yourself."
+    set {fhc.lang.en.player-not-dead} to "&cThe player &e[NAME] &cis already alive or hasn't died yet."
+    set {fhc.lang.en.confirm-revive} to "&eAre you sure you want to revive [NAME]?"
+    set {fhc.lang.en.confirm-cost} to "&eThis will cost you the following items: &a[ITEMS]"
+    set {fhc.lang.en.confirm-command} to "&eConfirm with &a/revive [NAME] &eto revive the player."
+    set {fhc.lang.en.confirm-timeout} to "&cYou have 20 seconds to confirm."
+    set {fhc.lang.en.confirmation-expired} to "&cThe confirmation time has expired."
+    set {fhc.lang.en.confirmation-expired-retry} to "&cThe confirmation time has expired. Use the command again."
+    set {fhc.lang.en.missing-items} to "&cYou don't have the necessary items to revive the player."
+    set {fhc.lang.en.items-required} to "&eItems required: &a[ITEMS]"
+    set {fhc.lang.en.revive-success} to "&aYou have successfully revived [NAME] using [ITEM]!"
+    set {fhc.lang.en.revive-broadcast} to "&e[PLAYER] &ahas revived &e[NAME] &ausing &e[ITEM]&a!"
+    set {fhc.lang.en.stats-title} to "&eStatistics for &a[NAME]&e:"
+    set {fhc.lang.en.stats-deaths} to "&7- Total deaths: &c[DEATHS]"
+    set {fhc.lang.en.stats-status-banned} to "&7- Status: &cBanned (can be revived)"
+    set {fhc.lang.en.stats-status-active} to "&7- Status: &aActive"
+    set {fhc.lang.en.usage-reset} to "&cCorrect usage: &e/fhcreset <player>"
+    set {fhc.lang.en.reset-success} to "&aStatistics for &e[NAME] &ahave been reset."
+    set {fhc.lang.en.registered-players} to "&eRegistered players in the system:"
+    set {fhc.lang.en.no-help-needed} to "&aNo players currently need help!"
+    set {fhc.lang.en.help-needed-title} to "&c&lPlayers who need help:"
+    set {fhc.lang.en.help-player-info} to "&e[NAME] &7- Deaths: &c[DEATHS] &7- Items needed: &a[ITEMS]"
+    set {fhc.lang.en.usage-language} to "&cCorrect usage: &e/fhclang <en|es>"
+    set {fhc.lang.en.language-changed} to "&aLanguage changed to: &e[LANG]"
+    set {fhc.lang.en.language-available} to "&eAvailable languages: &aen (English), es (Spanish)"
+
+    # Spanish Messages
+    set {fhc.lang.es.death} to "&cHas muerto por &e[DEATHS]&c vez y has sido baneado por &e[DAYS] dias&c."
+    set {fhc.lang.es.can-be-revived} to "&aPuedes ser revivido si otro jugador usa: &e/revive [NAME]"
+    set {fhc.lang.es.items-needed} to "&aItems necesarios: &e[ITEMS]"
+    set {fhc.lang.es.death-broadcast} to "&e[NAME] &cha muerto y ha sido baneado por &e[DAYS] dias&c. Alguien puede revivirlo con: &e/revive [NAME]"
+    set {fhc.lang.es.no-permission} to "&cNo tienes permiso para usar este comando."
+    set {fhc.lang.es.usage-revive} to "&cUso correcto: &e/revive <jugador>"
+    set {fhc.lang.es.player-unknown} to "&cNo conozco a este jugador. Asegurate de escribir el nombre correctamente."
+    set {fhc.lang.es.player-never-joined} to "&7Tip: El jugador debe haber entrado al menos una vez al servidor."
+    set {fhc.lang.es.cannot-revive-self} to "&cNo puedes revivir a ti mismo."
+    set {fhc.lang.es.player-not-dead} to "&cEl jugador &e[NAME] &cya esta vivo o no ha muerto aun."
+    set {fhc.lang.es.confirm-revive} to "&eEstas seguro que deseas revivir a [NAME]?"
+    set {fhc.lang.es.confirm-cost} to "&eEsto te costara los siguientes items: &a[ITEMS]"
+    set {fhc.lang.es.confirm-command} to "&eConfirma con &a/revive [NAME] &epara revivir al jugador."
+    set {fhc.lang.es.confirm-timeout} to "&cTienes 20 segundos para confirmar."
+    set {fhc.lang.es.confirmation-expired} to "&cEl tiempo de confirmacion ha expirado."
+    set {fhc.lang.es.confirmation-expired-retry} to "&cEl tiempo de confirmacion ha expirado. Usa el comando nuevamente."
+    set {fhc.lang.es.missing-items} to "&cNo tienes los items necesarios para revivir al jugador."
+    set {fhc.lang.es.items-required} to "&eItems requeridos: &a[ITEMS]"
+    set {fhc.lang.es.revive-success} to "&aHas revivido exitosamente a [NAME] usando [ITEM]!"
+    set {fhc.lang.es.revive-broadcast} to "&e[PLAYER] &aha revivido a &e[NAME] &ausando &e[ITEM]&a!"
+    set {fhc.lang.es.stats-title} to "&eEstadisticas de &a[NAME]&e:"
+    set {fhc.lang.es.stats-deaths} to "&7- Muertes totales: &c[DEATHS]"
+    set {fhc.lang.es.stats-status-banned} to "&7- Estado: &cBaneado (puede ser revivido)"
+    set {fhc.lang.es.stats-status-active} to "&7- Estado: &aActivo"
+    set {fhc.lang.es.usage-reset} to "&cUso correcto: &e/fhcreset <jugador>"
+    set {fhc.lang.es.reset-success} to "&aEstadisticas de &e[NAME] &ahan sido reseteadas."
+    set {fhc.lang.es.registered-players} to "&eJugadores registrados en el sistema:"
+    set {fhc.lang.es.no-help-needed} to "&aNo hay jugadores que necesiten ayuda actualmente!"
+    set {fhc.lang.es.help-needed-title} to "&c&lJugadores que necesitan ayuda:"
+    set {fhc.lang.es.help-player-info} to "&e[NAME] &7- Muertes: &c[DEATHS] &7- Items necesarios: &a[ITEMS]"
+    set {fhc.lang.es.usage-language} to "&cUso correcto: &e/fhclang <en|es>"
+    set {fhc.lang.es.language-changed} to "&aIdioma cambiado a: &e[LANG]"
+    set {fhc.lang.es.language-available} to "&eIdiomas disponibles: &aen (English), es (Espanol)"
+
+    send "&a[FuryHardcore] Plugin loaded successfully! Multilanguage support enabled." to console
+
+# ============================================================
+# PLAYER JOIN EVENT
+# ============================================================
+
+on join:
+    set {_uuid} to uuid of player
+    set {_name} to name of player
+    set {_nameLower} to lowercase {_name}
+
+    # Register player in database
+    set {fhc.player.uuid.%{_nameLower}%} to "%{_uuid}%"
+    set {fhc.player.name.%{_uuid}%} to {_name}
+
+    # Add to registered players list if not exists
+    if {fhc.registered.players::*} does not contain {_nameLower}:
+        add {_nameLower} to {fhc.registered.players::*}
+
+    # Set default language if not set
+    if {fhc.player.language.%{_uuid}%} is not set:
+        set {fhc.player.language.%{_uuid}%} to "{@default-language}"
+
+# ============================================================
+# DEATH SYSTEM
+# ============================================================
+
+on death of player:
+    set {_uuid} to uuid of victim
+    set {_name} to name of victim
+    set {_nameLower} to lowercase {_name}
+    set {_lang} to {fhc.player.language.%{_uuid}%}
+    if {_lang} is not set:
+        set {_lang} to "{@default-language}"
+
+    # Update mappings
+    set {fhc.player.uuid.%{_nameLower}%} to "%{_uuid}%"
+    set {fhc.player.name.%{_uuid}%} to {_name}
+
+    # Increment death counter
+    add 1 to {fhc.deaths.%{_uuid}%}
+    set {fhc.banned.%{_uuid}%} to true
+
+    # Determine ban time and items needed
+    if {fhc.deaths.%{_uuid}%} is 1:
+        set {_days} to 1
+        set {_items} to "Emerald Block OR Iron Block OR Gold Block"
+    else if {fhc.deaths.%{_uuid}%} is 2:
+        set {_days} to 2
+        set {_items} to "Diamond Block OR 1 Netherite Ingot"
+    else if {fhc.deaths.%{_uuid}%} is 3:
+        set {_days} to 3
+        set {_items} to "4 Netherite Ingots"
+    else:
+        set {_days} to 4
+        set {_items} to "4 Netherite Ingots"
+
+    # Apply tempban
+    make console execute command "/tempban %victim% %{_days}%d You died in the Anarchy Hardcore server. You can be revived by another player with the /revive command."
+
+    # Send messages to player
+    set {_msg1} to {fhc.lang.%{_lang}%.death}
+    replace all "[DEATHS]" in {_msg1} with "%{fhc.deaths.%{_uuid}%}%"
+    replace all "[DAYS]" in {_msg1} with "%{_days}%"
+    send "{@prefix} %{_msg1}%" to victim
+
+    set {_msg2} to {fhc.lang.%{_lang}%.can-be-revived}
+    replace all "[NAME]" in {_msg2} with "%victim%"
+    send "{@prefix} %{_msg2}%" to victim
+
+    set {_msg3} to {fhc.lang.%{_lang}%.items-needed}
+    replace all "[ITEMS]" in {_msg3} with {_items}
+    send "{@prefix} %{_msg3}%" to victim
+
+    # Broadcast to server
+    set {_broadcast} to {fhc.lang.en.death-broadcast}
+    replace all "[NAME]" in {_broadcast} with "%victim%"
+    replace all "[DAYS]" in {_broadcast} with "%{_days}%"
+    broadcast "{@prefix} %{_broadcast}%"
+
+# ============================================================
+# HELPER FUNCTIONS
+# ============================================================
+
+function searchPlayer(searchname: text) :: text:
+    set {_nameLower} to lowercase {_searchname}
+
+    # Try exact match
+    loop {fhc.registered.players::*}:
+        if loop-value is {_nameLower}:
+            return {fhc.player.uuid.%loop-value%}
+
+    # Try partial match
+    loop {fhc.registered.players::*}:
+        if loop-value contains {_nameLower}:
+            return {fhc.player.uuid.%loop-value%}
+
+    return ""
+
+function getItemsNeeded(deathcount: number) :: text:
+    if {_deathcount} is 1:
+        return "Emerald Block OR Iron Block OR Gold Block"
+    else if {_deathcount} is 2:
+        return "Diamond Block OR 1 Netherite Ingot"
+    else if {_deathcount} >= 3:
+        return "4 Netherite Ingots"
+    return "Unknown"
+
+# ============================================================
+# REVIVE COMMAND
+# ============================================================
+
+command /revive [<text>]:
+    permission: furyhardcore.revive
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_lang} to {fhc.player.language.%{_playerUUID}%}
+        if {_lang} is not set:
+            set {_lang} to "{@default-language}"
+
+        if player doesn't have permission "furyhardcore.revive":
+            set {_msg} to {fhc.lang.%{_lang}%.no-permission}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        if arg-1 is not set:
+            set {_msg} to {fhc.lang.%{_lang}%.usage-revive}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        # Search for target player
+        set {_targetUUID} to searchPlayer(arg-1)
+
+        if {_targetUUID} is "":
+            set {_msg1} to {fhc.lang.%{_lang}%.player-unknown}
+            set {_msg2} to {fhc.lang.%{_lang}%.player-never-joined}
+            send "{@prefix} %{_msg1}%"
+            send "{@prefix} %{_msg2}%"
+            stop
+
+        # Get real player name
+        set {_realName} to {fhc.player.name.%{_targetUUID}%}
+
+        # Check not reviving self
+        if "%{_playerUUID}%" is {_targetUUID}:
+            set {_msg} to {fhc.lang.%{_lang}%.cannot-revive-self}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        # Check if player is banned
+        if {fhc.banned.%{_targetUUID}%} is not true:
+            set {_msg} to {fhc.lang.%{_lang}%.player-not-dead}
+            replace all "[NAME]" in {_msg} with {_realName}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        # Get required items
+        set {_itemsList} to getItemsNeeded({fhc.deaths.%{_targetUUID}%})
+
+        # Confirmation system
+        if {fhc.revive.confirmation.%player%} is not "%{_targetUUID}%":
+            # First confirmation
+            set {fhc.revive.confirmation.%player%} to "%{_targetUUID}%"
+            set {fhc.revive.time.%player%} to now
+
+            set {_msg1} to {fhc.lang.%{_lang}%.confirm-revive}
+            replace all "[NAME]" in {_msg1} with {_realName}
+            send "{@prefix} %{_msg1}%"
+
+            set {_msg2} to {fhc.lang.%{_lang}%.confirm-cost}
+            replace all "[ITEMS]" in {_msg2} with {_itemsList}
+            send "{@prefix} %{_msg2}%"
+
+            set {_msg3} to {fhc.lang.%{_lang}%.confirm-command}
+            replace all "[NAME]" in {_msg3} with arg-1
+            send "{@prefix} %{_msg3}%"
+
+            set {_msg4} to {fhc.lang.%{_lang}%.confirm-timeout}
+            send "{@prefix} %{_msg4}%"
+
+            # Clear confirmation after 20 seconds
+            wait 20 seconds
+            if {fhc.revive.confirmation.%player%} is "%{_targetUUID}%":
+                delete {fhc.revive.confirmation.%player%}
+                delete {fhc.revive.time.%player%}
+                set {_msg} to {fhc.lang.%{_lang}%.confirmation-expired}
+                send "{@prefix} %{_msg}%"
+            stop
+        else:
+            # Second confirmation - execute revive
+            set {_timeElapsed} to difference between {fhc.revive.time.%player%} and now
+
+            if {_timeElapsed} is more than 20 seconds:
+                delete {fhc.revive.confirmation.%player%}
+                delete {fhc.revive.time.%player%}
+                set {_msg} to {fhc.lang.%{_lang}%.confirmation-expired-retry}
+                send "{@prefix} %{_msg}%"
+                stop
+
+            # Check and consume items
+            set {_hasItems} to false
+
+            if {fhc.deaths.%{_targetUUID}%} is 1:
+                if player has 1 emerald block:
+                    remove 1 emerald block from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "Emerald Block"
+                else if player has 1 iron block:
+                    remove 1 iron block from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "Iron Block"
+                else if player has 1 gold block:
+                    remove 1 gold block from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "Gold Block"
+
+            else if {fhc.deaths.%{_targetUUID}%} is 2:
+                if player has 1 diamond block:
+                    remove 1 diamond block from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "Diamond Block"
+                else if player has 1 netherite ingot:
+                    remove 1 netherite ingot from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "1 Netherite Ingot"
+
+            else if {fhc.deaths.%{_targetUUID}%} >= 3:
+                if player has 4 netherite ingot:
+                    remove 4 netherite ingot from player
+                    set {_hasItems} to true
+                    set {_itemUsed} to "4 Netherite Ingots"
+
+            # Verify has items
+            if {_hasItems} is false:
+                set {_msg1} to {fhc.lang.%{_lang}%.missing-items}
+                set {_msg2} to {fhc.lang.%{_lang}%.items-required}
+                replace all "[ITEMS]" in {_msg2} with {_itemsList}
+                send "{@prefix} %{_msg1}%"
+                send "{@prefix} %{_msg2}%"
+                delete {fhc.revive.confirmation.%player%}
+                delete {fhc.revive.time.%player%}
+                stop
+
+            # Revive player
+            make console execute command "/tempban %{_realName}% 0s"
+            set {fhc.banned.%{_targetUUID}%} to false
+
+            # Clear confirmation
+            delete {fhc.revive.confirmation.%player%}
+            delete {fhc.revive.time.%player%}
+
+            # Success messages
+            set {_msg1} to {fhc.lang.%{_lang}%.revive-success}
+            replace all "[NAME]" in {_msg1} with {_realName}
+            replace all "[ITEM]" in {_msg1} with {_itemUsed}
+            send "{@prefix} %{_msg1}%"
+
+            set {_broadcast} to {fhc.lang.en.revive-broadcast}
+            replace all "[PLAYER]" in {_broadcast} with "%player%"
+            replace all "[NAME]" in {_broadcast} with {_realName}
+            replace all "[ITEM]" in {_broadcast} with {_itemUsed}
+            broadcast "{@prefix} %{_broadcast}%"
+
+# ============================================================
+# WHO NEEDS HELP COMMAND
+# ============================================================
+
+command /whoneedhelp:
+    aliases: /wnh, /needhelp
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_lang} to {fhc.player.language.%{_playerUUID}%}
+        if {_lang} is not set:
+            set {_lang} to "{@default-language}"
+
+        set {_count} to 0
+
+        loop {fhc.registered.players::*}:
+            set {_uuid} to {fhc.player.uuid.%loop-value%}
+            if {fhc.banned.%{_uuid}%} is true:
+                if {_count} is 0:
+                    set {_msg} to {fhc.lang.%{_lang}%.help-needed-title}
+                    send "{@prefix} %{_msg}%"
+                add 1 to {_count}
+
+                set {_name} to {fhc.player.name.%{_uuid}%}
+                set {_deaths} to {fhc.deaths.%{_uuid}%}
+                set {_items} to getItemsNeeded({_deaths})
+
+                set {_msg} to {fhc.lang.%{_lang}%.help-player-info}
+                replace all "[NAME]" in {_msg} with {_name}
+                replace all "[DEATHS]" in {_msg} with "%{_deaths}%"
+                replace all "[ITEMS]" in {_msg} with {_items}
+                send "&7%{_count}%. %{_msg}%"
+
+        if {_count} is 0:
+            set {_msg} to {fhc.lang.%{_lang}%.no-help-needed}
+            send "{@prefix} %{_msg}%"
+
+# ============================================================
+# STATS COMMAND
+# ============================================================
+
+command /fhcstats [<text>]:
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_lang} to {fhc.player.language.%{_playerUUID}%}
+        if {_lang} is not set:
+            set {_lang} to "{@default-language}"
+
+        if arg-1 is not set:
+            set {_uuid} to uuid of player
+            set {_name} to name of player
+        else:
+            set {_uuid} to searchPlayer(arg-1)
+            if {_uuid} is "":
+                set {_msg} to {fhc.lang.%{_lang}%.player-unknown}
+                send "{@prefix} %{_msg}%"
+                stop
+            set {_name} to {fhc.player.name.%{_uuid}%}
+
+        set {_msg1} to {fhc.lang.%{_lang}%.stats-title}
+        replace all "[NAME]" in {_msg1} with {_name}
+        send "{@prefix} %{_msg1}%"
+
+        set {_deathCount} to {fhc.deaths.%{_uuid}%}
+        if {_deathCount} is not set:
+            set {_deathCount} to 0
+
+        set {_msg2} to {fhc.lang.%{_lang}%.stats-deaths}
+        replace all "[DEATHS]" in {_msg2} with "%{_deathCount}%"
+        send "%{_msg2}%"
+
+        if {fhc.banned.%{_uuid}%} is true:
+            set {_msg3} to {fhc.lang.%{_lang}%.stats-status-banned}
+            send "%{_msg3}%"
+        else:
+            set {_msg3} to {fhc.lang.%{_lang}%.stats-status-active}
+            send "%{_msg3}%"
+
+# ============================================================
+# ADMIN COMMANDS
+# ============================================================
+
+command /fhcreset [<text>]:
+    permission: furyhardcore.admin
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_lang} to {fhc.player.language.%{_playerUUID}%}
+        if {_lang} is not set:
+            set {_lang} to "{@default-language}"
+
+        if player doesn't have permission "furyhardcore.admin":
+            set {_msg} to {fhc.lang.%{_lang}%.no-permission}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        if arg-1 is not set:
+            set {_msg} to {fhc.lang.%{_lang}%.usage-reset}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        set {_uuid} to searchPlayer(arg-1)
+        if {_uuid} is "":
+            set {_msg} to {fhc.lang.%{_lang}%.player-unknown}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        set {_name} to {fhc.player.name.%{_uuid}%}
+
+        delete {fhc.deaths.%{_uuid}%}
+        delete {fhc.banned.%{_uuid}%}
+
+        set {_msg} to {fhc.lang.%{_lang}%.reset-success}
+        replace all "[NAME]" in {_msg} with {_name}
+        send "{@prefix} %{_msg}%"
+
+command /fhclist:
+    permission: furyhardcore.admin
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_lang} to {fhc.player.language.%{_playerUUID}%}
+        if {_lang} is not set:
+            set {_lang} to "{@default-language}"
+
+        if player doesn't have permission "furyhardcore.admin":
+            set {_msg} to {fhc.lang.%{_lang}%.no-permission}
+            send "{@prefix} %{_msg}%"
+            stop
+
+        set {_msg} to {fhc.lang.%{_lang}%.registered-players}
+        send "{@prefix} %{_msg}%"
+        loop {fhc.registered.players::*}:
+            set {_uuid} to {fhc.player.uuid.%loop-value%}
+            set {_name} to {fhc.player.name.%{_uuid}%}
+            send "&7- &a%{_name}% &7(UUID: %{_uuid}%)"
+
+# ============================================================
+# LANGUAGE COMMAND
+# ============================================================
+
+command /fhclang [<text>]:
+    aliases: /fhclanguage
+    trigger:
+        set {_playerUUID} to uuid of player
+        set {_currentLang} to {fhc.player.language.%{_playerUUID}%}
+        if {_currentLang} is not set:
+            set {_currentLang} to "{@default-language}"
+
+        if arg-1 is not set:
+            set {_msg} to {fhc.lang.%{_currentLang}%.usage-language}
+            send "{@prefix} %{_msg}%"
+            set {_msg2} to {fhc.lang.%{_currentLang}%.language-available}
+            send "{@prefix} %{_msg2}%"
+            stop
+
+        if arg-1 is "en":
+            set {fhc.player.language.%{_playerUUID}%} to "en"
+            set {_langName} to "English"
+            set {_msg} to {fhc.lang.en.language-changed}
+            replace all "[LANG]" in {_msg} with {_langName}
+            send "{@prefix} %{_msg}%"
+        else if arg-1 is "es":
+            set {fhc.player.language.%{_playerUUID}%} to "es"
+            set {_langName} to "Espanol"
+            set {_msg} to {fhc.lang.es.language-changed}
+            replace all "[LANG]" in {_msg} with {_langName}
+            send "{@prefix} %{_msg}%"
+        else:
+            set {_msg} to {fhc.lang.%{_currentLang}%.usage-language}
+            send "{@prefix} %{_msg}%"
+            set {_msg2} to {fhc.lang.%{_currentLang}%.language-available}
+            send "{@prefix} %{_msg2}%"

@@ -238,17 +238,41 @@ impl World {
     }
 
     pub async fn shutdown(&self) {
+        let entity_count = self.entities.read().await.len();
+        let entities_start = std::time::Instant::now();
+        log::info!(
+            "Shutdown: saving entities (count={}) for world {:?}",
+            entity_count,
+            self.dimension
+        );
         for (uuid, entity) in self.entities.read().await.iter() {
             self.save_entity(uuid, entity).await;
         }
+        log::info!(
+            "Shutdown: entities saved in {:?} for world {:?}",
+            entities_start.elapsed(),
+            self.dimension
+        );
 
         // Save portal POI to disk
+        let poi_start = std::time::Instant::now();
         let save_result = self.portal_poi.lock().await.save_all();
         if let Err(e) = save_result {
             log::error!("Failed to save portal POI: {e}");
         }
+        log::info!(
+            "Shutdown: portal POI saved in {:?} for world {:?}",
+            poi_start.elapsed(),
+            self.dimension
+        );
 
+        let level_start = std::time::Instant::now();
         self.level.shutdown().await;
+        log::info!(
+            "Shutdown: level shutdown in {:?} for world {:?}",
+            level_start.elapsed(),
+            self.dimension
+        );
     }
 
     async fn save_entity(&self, uuid: &uuid::Uuid, entity: &Arc<dyn EntityBase>) {

@@ -1,0 +1,25 @@
+[package]
+name = "skrs"
+version = "0.1.0-dev+TESTLOG"
+edition.workspace = true
+
+
+[dependencies]
+pumpkin = { path = "../pumpkin", package = "pumpkin" }
+pumpkin-util = { path = "../pumpkin-util", package = "pumpkin-util" }
+pumpkin-api-macros = { path = "../pumpkin-api-macros", package = "pumpkin-api-macros" }
+pumpkin-protocol = { path = "../pumpkin-protocol", package = "pumpkin-protocol" }
+pumpkin-data = { path = "../pumpkin-data", package = "pumpkin-data" }
+pumpkin-world = { path = "../pumpkin-world", package = "pumpkin-world" }
+log = "0.4"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+once_cell = "1.19"
+dashmap = "6.1"
+futures = "0.3"
+async-recursion = "1.1"
+serde_json = "1"
+time = { version = "0.3", features = ["macros"] }
+uuid = "1"
+
+[lib]
+crate-type = ["cdylib"]

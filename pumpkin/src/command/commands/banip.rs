@@ -77,7 +77,7 @@ impl CommandExecutor for ReasonExecutor {
 }
 
 async fn ban_ip(sender: &CommandSender, server: &Server, target: &str, reason: Option<String>) {
-    let reason = reason.unwrap_or_else(|| "Banned by an operator.".to_string());
+    let reason_text = reason.unwrap_or_else(|| "Banned by an operator.".to_string());
 
     let Some(target_ip) = parse_ip(target, server).await else {
         sender
@@ -99,7 +99,7 @@ async fn ban_ip(sender: &CommandSender, server: &Server, target: &str, reason: O
         target_ip,
         sender.to_string(),
         None,
-        reason.clone(),
+        reason_text.clone(),
     ));
 
     banned_ips.save();
@@ -118,7 +118,7 @@ async fn ban_ip(sender: &CommandSender, server: &Server, target: &str, reason: O
             "commands.banip.success",
             [
                 TextComponent::text(target_ip.to_string()),
-                TextComponent::text(reason),
+                TextComponent::text(reason_text.clone()),
             ],
         ))
         .await;

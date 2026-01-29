@@ -22,6 +22,18 @@ pub struct PlayerMoveEvent {
 
     /// The position to which the player moved.
     pub to: Vector3<f64>,
+
+    /// The yaw the player rotated from.
+    pub from_yaw: f32,
+
+    /// The pitch the player rotated from.
+    pub from_pitch: f32,
+
+    /// The yaw the player rotated to.
+    pub to_yaw: f32,
+
+    /// The pitch the player rotated to.
+    pub to_pitch: f32,
 }
 
 impl PlayerMoveEvent {
@@ -34,11 +46,23 @@ impl PlayerMoveEvent {
     ///
     /// # Returns
     /// A new instance of `PlayerMoveEvent`.
-    pub fn new(player: Arc<Player>, from: Vector3<f64>, to: Vector3<f64>) -> Self {
+    pub fn new(
+        player: Arc<Player>,
+        from: Vector3<f64>,
+        to: Vector3<f64>,
+        from_yaw: f32,
+        from_pitch: f32,
+        to_yaw: f32,
+        to_pitch: f32,
+    ) -> Self {
         Self {
             player,
             from,
             to,
+            from_yaw,
+            from_pitch,
+            to_yaw,
+            to_pitch,
             cancelled: false,
         }
     }

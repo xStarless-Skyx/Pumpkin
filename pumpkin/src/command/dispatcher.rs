@@ -62,6 +62,15 @@ pub struct CommandDispatcher {
 
 /// Stores registered [`CommandTree`]s and dispatches commands to them.
 impl CommandDispatcher {
+    pub async fn dispatch_command<'a>(
+        &'a self,
+        src: &CommandSender,
+        server: &'a Server,
+        cmd: &'a str,
+    ) -> Result<(), CommandError> {
+        self.dispatch(src, server, cmd).await
+    }
+
     pub async fn handle_command<'a>(
         &'a self,
         sender: &CommandSender,

@@ -1,0 +1,511 @@
+# ===========================================================
+#  M A S T E R   E S S E N T I A L S   v31.46.1
+#  Public Release - Stable - English
+# ===========================================================
+
+options:
+    # --- CONFIGURATION ---
+    prefix: &8[&bMasterEssentials&8] &7
+    money_symbol: &a$
+    
+    # --- SOUNDS ---
+    sound_success: entity.experience_orb.pickup
+    sound_error: block.note_block.bass
+    sound_click: ui.button.click
+    sound_quest: ui.toast.challenge_complete
+    sound_warp: entity.enderman.teleport
+
+# -----------------------------------------------------------
+# 1. CORE & INITIALIZATION
+# -----------------------------------------------------------
+
+on load:
+    send "{@prefix} &3Loading v31.46.1..." to console
+    runDefaultLoad()
+    send "{@prefix} &aMasterEssentials v31.46.1 loaded successfully." to console
+
+function runDefaultLoad():
+    # 1. CLEANING OLD DATA
+    delete {shop_nature::*}
+    delete {shop_stone::*}
+    delete {shop_color::*}
+    delete {shop_nether::*}
+    delete {shop_food::*}
+    delete {shop_rare::*}
+    delete {shop_tools::*}
+    delete {quests_data::*}
+    
+    # 2. FILLING LISTS
+    
+    # --- SHOP: NATURE ---
+    add oak log, spruce log, birch log, jungle log, acacia log and dark oak log to {shop_nature::*}
+    add oak planks, spruce planks, birch planks, jungle planks and acacia planks to {shop_nature::*}
+    add dirt, grass block, podzol, mycelium, mud, clay and sand to {shop_nature::*}
+    add bamboo, sugar cane, cactus, pumpkin, melon, wheat, carrot and potato to {shop_nature::*}
+    
+    # --- SHOP: STONE ---
+    add stone, cobblestone, mossy cobblestone, stone bricks and smooth stone to {shop_stone::*}
+    add granite, diorite, andesite, deepslate, cobbled deepslate, tuff and calcite to {shop_stone::*}
+    add bricks, mud bricks, sandstone, red sandstone, prismarine and blackstone to {shop_stone::*}
+    add glass, white stained glass, quartz block and smooth quartz to {shop_stone::*}
+
+    # --- SHOP: COLORS ---
+    add white wool, orange wool, magenta wool, light blue wool, yellow wool and lime wool to {shop_color::*}
+    add pink wool, gray wool, light gray wool, cyan wool, purple wool and blue wool to {shop_color::*}
+    add brown wool, green wool, red wool and black wool to {shop_color::*}
+    add white concrete, red concrete, blue concrete, green concrete and yellow concrete to {shop_color::*}
+
+    # --- SHOP: NETHER ---
+    add netherrack, crimson nylium, warped nylium, soul sand and soul soil to {shop_nether::*}
+    add glowstone, magma block, shroomlight, nether bricks and red nether bricks to {shop_nether::*}
+    add end stone, end stone bricks, purpur block, end rod, obsidian and crying obsidian to {shop_nether::*}
+    add redstone, repeater, comparator, piston, sticky piston, observer and dispenser to {shop_nether::*}
+    add chest, barrel, crafting table, furnace, blast furnace, smoker and anvil to {shop_nether::*}
+
+    # --- SHOP: FOOD ---
+    add cooked beef, cooked porkchop, cooked chicken, cooked mutton and cooked rabbit to {shop_food::*}
+    add cooked cod, cooked salmon, bread, golden apple, pumpkin pie and cake to {shop_food::*}
+    
+    # --- SHOP: RARE ---
+    add coal, charcoal, iron ingot, gold ingot and copper ingot to {shop_rare::*}
+    add diamond, emerald, lapis lazuli, amethyst shard and netherite scrap to {shop_rare::*}
+    add beacon, heart of the sea, nautilus shell, dragon egg and nether star to {shop_rare::*}
+
+    # --- SHOP: TOOLS ---
+    add iron sword, iron pickaxe, iron axe and iron shovel to {shop_tools::*}
+    add diamond sword, diamond pickaxe, diamond axe and diamond shovel to {shop_tools::*}
+    add netherite sword, netherite pickaxe, netherite axe and netherite shovel to {shop_tools::*}
+    
+    # Special fix for Flint and Steel
+    add bow, crossbow, arrow, shield and shears to {shop_tools::*}
+    add flint and steel to {shop_tools::*}
+
+    # 3. REGISTERING QUESTS
+    registerQuest(1, "Beginner Hunter", "kill", "animal", 10, 100)
+    registerQuest(2, "Zombie Slayer", "kill", "zombie", 15, 250)
+    registerQuest(3, "Skeleton Cracker", "kill", "skeleton", 15, 250)
+    registerQuest(4, "Spider Bane", "kill", "spider", 10, 300)
+    registerQuest(5, "End Warrior", "kill", "enderman", 5, 500)
+    
+    registerQuest(6, "Stone Miner", "break", "stone", 64, 50)
+    registerQuest(7, "Iron Digger", "break", "iron ore", 16, 200)
+    registerQuest(8, "Gold Rush", "break", "gold ore", 10, 300)
+    registerQuest(9, "Diamond Finder", "break", "diamond ore", 5, 1000)
+    registerQuest(10, "Lumberjack", "break", "log", 64, 150)
+    
+    registerQuest(11, "Wheat Farmer", "break", "wheat", 32, 100)
+    registerQuest(12, "Marathon Runner", "run", "none", 1000, 500)
+    registerQuest(13, "Builder", "place", "stone", 64, 100)
+    registerQuest(14, "Blacksmith", "craft", "iron chestplate", 1, 150)
+
+function registerQuest(id: number, name: text, type: text, target: text, amount: number, reward: number):
+    set {q_name::%{_id}%} to {_name}
+    set {q_type::%{_id}%} to {_type}
+    set {q_target::%{_id}%} to {_target}
+    set {q_amount::%{_id}%} to {_amount}
+    set {q_reward::%{_id}%} to {_reward}
+
+# -----------------------------------------------------------
+# 2. COMMANDS & ECONOMY
+# -----------------------------------------------------------
+
+# --- Tab Completion (Main) ---
+on tab complete of "/masteressentials" or "/em" or "/me":
+    set tab completions for position 1 to "balance", "give", "take", "reset" and "help"
+    
+    if tab arg-1 is "give" or "take" or "balance":
+        set tab completions for position 2 to all players
+
+command /masteressentials <text> [<text>] [<number>]:
+    aliases: /em, /me
+    permission: op
+    trigger:
+        # 1. BALANCE CHECK
+        if arg-1 is "balance":
+            if arg-2 is set:
+                set {_p} to arg-2 parsed as player
+                if {_p} is set:
+                    send "{@prefix} &7Balance of &b%{_p}%&7: &e%{balance::%{_p}%}% {@money_symbol}"
+                else:
+                    send "{@prefix} &cPlayer not found."
+            else:
+                send "{@prefix} &7Your Balance: &e%{balance::%player%}% {@money_symbol}"
+
+        # 2. GIVE MONEY
+        else if arg-1 is "give":
+            if arg-2 is set:
+                if arg-3 is set:
+                    add arg-3 to {balance::%arg-2 parsed as player%}
+                    send "{@prefix} &aAdded %arg-3% {@money_symbol} to %arg-2%'s account."
+                else:
+                    send "{@prefix} &cUsage: /em give <player> <amount>"
+            else:
+                send "{@prefix} &cUsage: /em give <player> <amount>"
+
+        # 3. TAKE MONEY
+        else if arg-1 is "take":
+            if arg-2 is set:
+                if arg-3 is set:
+                    set {_p} to arg-2 parsed as player
+                    subtract arg-3 from {balance::%{_p}%}
+                    if {balance::%{_p}%} < 0:
+                        set {balance::%{_p}%} to 0
+                    send "{@prefix} &eRemoved %arg-3% {@money_symbol} from %{_p}%'s account."
+                else:
+                    send "{@prefix} &cUsage: /em take <player> <amount>"
+            else:
+                send "{@prefix} &cUsage: /em take <player> <amount>"
+
+        # 4. RESET SYSTEM
+        else if arg-1 is "reset":
+            runDefaultLoad()
+            send "{@prefix} &aSystem reloaded (v31.46.1) and default items restored."
+        
+        # 5. HELP
+        else:
+            send ""
+            send "{@prefix} &lCommands (v31.46.1):"
+            send " &8- &b/em balance [player] &7Check money"
+            send " &8- &b/em give <player> <amount> &7Give money"
+            send " &8- &b/em take <player> <amount> &7Remove money"
+            send " &8- &b/em reset &7Reload shops/quests"
+            send " &8- &b/shop &7Open the market"
+            send " &8- &b/sell &7Sell held item"
+            send ""
+
+command /money [<player>]:
+    trigger:
+        set {_p} to arg-1 ? player
+        send "{@prefix} &7Balance: &a%{balance::%{_p}%}% {@money_symbol}"
+
+command /sell:
+    trigger:
+        set {_i} to player's tool
+        if {_i} is air:
+            send "{@prefix} &cYou cannot sell air!"
+            stop
+        # Default price logic (10$ per unit)
+        set {_amount} to item amount of {_i}
+        set {_price} to 10 * {_amount}
+        
+        add {_price} to {balance::%player%}
+        remove {_i} from player's inventory
+        play sound "{@sound_success}" to player
+        send "{@prefix} &7Sold &f%{_amount}%x %type of {_i}% &7for &a%{_price}% {@money_symbol}"
+
+# -----------------------------------------------------------
+# 3. SHOP GUI SYSTEM
+# -----------------------------------------------------------
+
+command /shop:
+    trigger:
+        openShopCategory(player, "main")
+
+function openShopCategory(p: player, cat: text):
+    play sound "{@sound_click}" to {_p}
+    
+    # --- MAIN MENU ---
+    if {_cat} is "main":
+        set metadata tag "shopGui" of {_p} to chest inventory with 4 rows named "&8&lMaster Market"
+        
+        set slot 10 of metadata tag "shopGui" of {_p} to oak log named "&a&lNature" with lore "&7Blocks, Plants & Farming"
+        set slot 11 of metadata tag "shopGui" of {_p} to stone bricks named "&7&lStone" with lore "&7Building blocks & Minerals"
+        set slot 12 of metadata tag "shopGui" of {_p} to magenta wool named "&d&lColors" with lore "&7Wool, Concrete & Dyes"
+        set slot 13 of metadata tag "shopGui" of {_p} to netherrack named "&c&lNether" with lore "&7Nether blocks & Redstone"
+        set slot 14 of metadata tag "shopGui" of {_p} to cooked beef named "&6&lFood" with lore "&7Food & Consumables"
+        set slot 15 of metadata tag "shopGui" of {_p} to diamond named "&b&lRare" with lore "&7Ores & Treasures"
+        set slot 16 of metadata tag "shopGui" of {_p} to nether star named "&5&lArtifacts" with lore "&7Custom OP Items"
+        set slot 22 of metadata tag "shopGui" of {_p} to iron pickaxe named "&8&lTools" with lore "&7Weapons & Equipment"
+        
+        open (metadata tag "shopGui" of {_p}) to {_p}
+    
+    # --- CUSTOM ARTIFACTS MENU ---
+    else if {_cat} is "custom":
+        set metadata tag "shopGui" of {_p} to chest inventory with 4 rows named "&5&lMaster Artifacts"
+        
+        shopCustom({_p}, 0, golden axe, "&e&lZeus' Thunder", 5000, "Strikes lightning on enemies.")
+        shopCustom({_p}, 1, diamond pickaxe, "&b&lExcavator 3x3", 10000, "Mines a 3x3 area.")
+        shopCustom({_p}, 2, netherite sword, "&c&lVampire Blade", 15000, "Steals life from enemies.")
+        shopCustom({_p}, 3, bow, "&4&lBoom Bow", 8000, "Shoots explosive arrows.")
+        shopCustom({_p}, 4, golden boots, "&f&lHermes Boots", 6000, "Grants divine speed.")
+        shopCustom({_p}, 5, bow, "&d&lTeleport Bow", 7500, "Teleports you to the arrow.")
+        shopCustom({_p}, 6, golden pickaxe, "&6&lSmelter Pick", 9000, "Auto-smelts ores.")
+        shopCustom({_p}, 7, diamond hoe, "&a&lFarmer's Scythe", 5000, "Harvests & Replants 3x3.")
+        shopCustom({_p}, 8, iron sword, "&5&lVoid Blade", 12000, "Teleports behind enemy on hit.")
+        shopCustom({_p}, 9, diamond helmet, "&9&lNight Vision", 4000, "Permanent night vision.")
+        
+        set slot 31 of metadata tag "shopGui" of {_p} to arrow named "&c&lBack"
+        open (metadata tag "shopGui" of {_p}) to {_p}
+
+    # --- DYNAMIC CATEGORIES ---
+    else:
+        set {_list::*} to {shop_%{_cat}%::*}
+        set metadata tag "shopGui" of {_p} to chest inventory with 6 rows named "&8&lMarket: %{_cat}%"
+        set {_slot} to 0
+        loop {_list::*}:
+            if {_slot} < 53:
+                set slot {_slot} of metadata tag "shopGui" of {_p} to loop-value with lore "&7Price: &a10 {@money_symbol}"
+                add 1 to {_slot}
+        set slot 53 of metadata tag "shopGui" of {_p} to arrow named "&c&lBack"
+        open (metadata tag "shopGui" of {_p}) to {_p}
+
+function shopCustom(p: player, s: number, i: item, name: text, price: number, desc: text):
+    set slot {_s} of metadata tag "shopGui" of {_p} to {_i} named {_name} with lore "&7Ability: &f%{_desc}%" and "" and "&7Price: &a%{_price}% {@money_symbol}"
+
+# --- CLICK HANDLER ---
+
+on inventory click:
+    if event-inventory is (metadata tag "shopGui" of player):
+        cancel event
+        set {_slot} to index of event-slot
+        
+        # --- MAIN MENU NAVIGATION ---
+        if name of event-inventory is "&8&lMaster Market":
+            if {_slot} is 10:
+                openShopCategory(player, "nature")
+            else if {_slot} is 11:
+                openShopCategory(player, "stone")
+            else if {_slot} is 12:
+                openShopCategory(player, "color")
+            else if {_slot} is 13:
+                openShopCategory(player, "nether")
+            else if {_slot} is 14:
+                openShopCategory(player, "food")
+            else if {_slot} is 15:
+                openShopCategory(player, "rare")
+            else if {_slot} is 16:
+                openShopCategory(player, "custom")
+            else if {_slot} is 22:
+                openShopCategory(player, "tools")
+        
+        # --- SUB-MENUS & BUYING ---
+        else:
+            if event-item is arrow named "&c&lBack":
+                openShopCategory(player, "main")
+            
+            else if event-item is not air:
+                # --- SECURE BUYING LOGIC ---
+                set {_price} to 10
+                
+                if {balance::%player%} >= {_price}:
+                    subtract {_price} from {balance::%player%}
+                    give event-item to player
+                    play sound "{@sound_success}" to player
+                    send "{@prefix} &aPurchased! &7New Balance: &e%{balance::%player%}% {@money_symbol}"
+                else:
+                    play sound "{@sound_error}" to player
+                    send "{@prefix} &cInsufficient funds! &7Need: &c%{_price}% {@money_symbol}"
+
+# -----------------------------------------------------------
+# 4. NPC & QUESTS SYSTEM (FIXED)
+# -----------------------------------------------------------
+
+# --- NPC Tab Completion (NEW) ---
+on tab complete of "/npc":
+    set tab completions for position 1 to "create" and "remove"
+    if tab arg-1 is "create":
+        set tab completions for position 3 to "villager", "zombie", "skeleton", "piglin", "blaze", "enderman", "iron_golem", "witch", "fox" and "bee"
+
+command /npc <text> [<text>] [<entity type>]:
+    permission: op
+    trigger:
+        if arg-1 is "create":
+            if arg-2 is set:
+                set {_type} to arg-3 ? villager
+                spawn {_type} at player
+                
+                # --- FIX v31.46.1: Safety Delay ---
+                wait 2 ticks 
+                set {_npc} to spawned entity
+                
+                if {_npc} is set:
+                    set name of {_npc} to colored arg-2
+                    add nbt compound from "{NoAI:1b,Invulnerable:1b,Silent:1b,PersistenceRequired:1b}" to nbt of {_npc}
+                    
+                    # Store UUID in list
+                    add uuid of {_npc} to {npc_list::*}
+                    
+                    send "{@prefix} &aNPC &r%arg-2% &acreated successfully!"
+                else:
+                    send "{@prefix} &cError: Could not spawn entity."
+            else:
+                send "{@prefix} &cPlease specify a name."
+        
+        else if arg-1 is "remove":
+            set {_found} to false
+            loop entities in radius 3 around player:
+                if {npc_list::*} contains uuid of loop-entity:
+                    set {_found} to true
+                    clear loop-entity
+                    remove uuid of loop-entity from {npc_list::*}
+                    send "{@prefix} &cNPC removed."
+            if {_found} is false:
+                send "{@prefix} &cNo NPC found nearby."
+
+on right click on entity:
+    if {npc_list::*} contains uuid of entity:
+        cancel event
+        openQuestGUI(player)
+
+function openQuestGUI(p: player):
+    play sound "{@sound_click}" to {_p}
+    set metadata tag "questGui" of {_p} to chest inventory with 6 rows named "&8&lQuest Board"
+    
+    set {_slot} to 0
+    loop 20 times:
+        set {_id} to loop-number
+        if {q_name::%{_id}%} is set:
+            set {_icon} to paper
+            set {_status} to "&cNot Started"
+            
+            # Smart Icons
+            if {q_type::%{_id}%} is "kill":
+                set {_icon} to iron sword
+            else if {q_type::%{_id}%} is "break":
+                set {_icon} to diamond pickaxe
+            else if {q_type::%{_id}%} is "run":
+                set {_icon} to leather boots
+            else if {q_type::%{_id}%} is "craft":
+                set {_icon} to crafting table
+            
+            if {quest_active::%{_p}%} is {_id}:
+                set {_status} to "&a&lIN PROGRESS"
+                enchant {_icon} with unbreaking 1
+                set {_progress} to {quest_progress::%{_p}%}
+            else:
+                set {_progress} to 0
+            
+            set slot {_slot} of metadata tag "questGui" of {_p} to {_icon} named "&6Quest #%{_id}%: %{q_name::%{_id}%}%" with lore "&7Task: %{q_type::%{_id}%}% &e%{q_target::%{_id}%}%" and "&7Progress: &f%{_progress}%/%{q_amount::%{_id}%}%" and "&7Reward: &a%{q_reward::%{_id}%}% {@money_symbol}" and "" and "%{_status}%"
+            add 1 to {_slot}
+        
+    set slot 49 of metadata tag "questGui" of {_p} to barrier named "&cCancel Current Quest"
+    open (metadata tag "questGui" of {_p}) to {_p}
+
+on inventory click:
+    if event-inventory is (metadata tag "questGui" of player):
+        cancel event
+        if index of event-slot is 49:
+            delete {quest_active::%player%}
+            delete {quest_progress::%player%}
+            send "{@prefix} &cQuest cancelled."
+            close player's inventory
+            stop
+
+        if index of event-slot <= 40:
+            set {_id} to (index of event-slot) + 1
+            if {q_name::%{_id}%} is set:
+                if {quest_active::%player%} is not set:
+                    set {quest_active::%player%} to {_id}
+                    set {quest_progress::%player%} to 0
+                    send "{@prefix} &aQuest Accepted: &l%{q_name::%{_id}%}%"
+                    play sound "{@sound_click}" to player
+                    close player's inventory
+                else:
+                    send "{@prefix} &cFinish your current quest first!"
+
+# -----------------------------------------------------------
+# 5. GAME LOGIC & QUEST TRACKERS
+# -----------------------------------------------------------
+
+function progressQuest(p: player, type: text, target: object, amount: number):
+    if {quest_active::%{_p}%} is set:
+        set {_id} to {quest_active::%{_p}%}
+        if {q_type::%{_id}%} is {_type}:
+            set {_match} to false
+            # Check targets
+            if {q_target::%{_id}%} is "none":
+                set {_match} to true
+            else if {q_target::%{_id}%} is "animal":
+                if "%{_target}%" contains "pig" or "cow" or "sheep" or "chicken" or "rabbit":
+                    set {_match} to true
+            else if {q_target::%{_id}%} is "log":
+                if "%{_target}%" contains "log":
+                    set {_match} to true
+            else if "%{_target}%" contains {q_target::%{_id}%}:
+                set {_match} to true
+            
+            if {_match} is true:
+                add {_amount} to {quest_progress::%{_p}%}
+                send action bar "&eQuest: %{quest_progress::%{_p}%}%/%{q_amount::%{_id}%}%" to {_p}
+                
+                if {quest_progress::%{_p}%} >= {q_amount::%{_id}%}:
+                    set {_reward} to {q_reward::%{_id}%}
+                    add {_reward} to {balance::%{_p}%}
+                    send "{@prefix} &6&lQUEST COMPLETE! &a+%{_reward}% {@money_symbol}" to {_p}
+                    play sound "{@sound_quest}" to {_p}
+                    delete {quest_active::%{_p}%}
+                    delete {quest_progress::%{_p}%}
+
+on death:
+    if attacker is a player:
+        progressQuest(attacker, "kill", victim, 1)
+on break:
+    progressQuest(player, "break", event-block, 1)
+on craft:
+    progressQuest(player, "craft", event-item, 1)
+on place:
+    progressQuest(player, "place", event-block, 1)
+
+every 2 seconds:
+    loop all players:
+        if {lastLoc::%loop-player%} is set:
+            if loop-player's world is {lastLoc::%loop-player%}'s world:
+                set {_dist} to distance between loop-player and {lastLoc::%loop-player%}
+                if {_dist} > 0:
+                    progressQuest(loop-player, "run", "none", {_dist})
+        set {lastLoc::%loop-player%} to location of loop-player
+
+# -----------------------------------------------------------
+# 6. CUSTOM ENCHANTS EFFECTS
+# -----------------------------------------------------------
+
+on damage:
+    if attacker is a player:
+        set {_tool} to attacker's tool
+        set {_name} to uncolored name of {_tool}
+        if {_name} contains "Zeus":
+            strike lightning effect at victim
+            damage victim by 2
+        else if {_name} contains "Vampire":
+            heal attacker by 0.5 hearts
+        else if {_name} contains "Void Blade":
+            chance of 20%:
+                teleport attacker behind victim
+                play sound "{@sound_warp}" to attacker
+
+on break:
+    set {_tool} to player's tool
+    set {_name} to uncolored name of {_tool}
+    if {_name} contains "Excavator":
+        if {_tool} is diamond pickaxe:
+            loop blocks in radius 1 around event-block:
+                if loop-block is stone or cobblestone or dirt or gravel or sand or deepslate:
+                    break loop-block naturally using player's tool
+    else if {_name} contains "Smelter":
+        if event-block is iron ore or deepslate iron ore:
+            cancel event
+            set block at event-block to air
+            drop iron ingot at event-block
+        else if event-block is gold ore or deepslate gold ore:
+            cancel event
+            set block at event-block to air
+            drop gold ingot at event-block
+
+on projectile hit:
+    if projectile is an arrow:
+        if shooter is a player:
+            set {_name} to uncolored name of shooter's tool
+            if {_name} contains "Boom Bow":
+                create an explosion of force 2 at event-location
+            else if {_name} contains "Teleport Bow":
+                teleport shooter to event-location
+                play sound "{@sound_warp}" to shooter
+
+every 5 seconds:
+    loop all players:
+        set {_boots} to uncolored name of loop-player's boots
+        if {_boots} contains "Hermes":
+            apply speed 2 to loop-player for 6 seconds
+        set {_helm} to uncolored name of loop-player's helmet
+        if {_helm} contains "Night Vision":
+            apply night vision to loop-player for 15 seconds

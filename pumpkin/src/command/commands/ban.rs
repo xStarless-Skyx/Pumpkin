@@ -71,7 +71,7 @@ async fn ban_player(
 ) {
     let mut banned_players = server.data.banned_player_list.write().await;
 
-    let reason = reason.unwrap_or_else(|| "Banned by an operator.".to_string());
+    let reason_text = reason.unwrap_or_else(|| "Banned by an operator.".to_string());
     let profile = &player.gameprofile;
 
     if banned_players.get_entry(&player.gameprofile).is_some() {
@@ -85,7 +85,7 @@ async fn ban_player(
         profile,
         sender.to_string(),
         None,
-        reason.clone(),
+        reason_text.clone(),
     ));
 
     banned_players.save();
@@ -95,7 +95,7 @@ async fn ban_player(
     sender
         .send_message(TextComponent::translate(
             "commands.ban.success",
-            [player.get_display_name().await, TextComponent::text(reason)],
+            [player.get_display_name().await, TextComponent::text(reason_text.clone())],
         ))
         .await;
 

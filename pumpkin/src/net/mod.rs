@@ -16,6 +16,7 @@ use serde::Deserialize;
 use sha1::Digest;
 use sha2::Sha256;
 use tokio::task::JoinHandle;
+use time::OffsetDateTime;
 
 use thiserror::Error;
 use uuid::Uuid;
@@ -170,23 +171,46 @@ pub async fn can_not_join(
     address: &SocketAddr,
     server: &Server,
 ) -> Option<TextComponent> {
+    log::info!(
+        "Join check: profile name='{}' uuid={}",
+        profile.name,
+        profile.id
+    );
     const FORMAT_DESCRIPTION: &[time::format_description::FormatItem<'static>] = time::macros::format_description!(
         "[year]-[month]-[day] at [hour]:[minute]:[second] [offset_hour sign:mandatory]:[offset_minute]"
     );
 
     let mut banned_players = server.data.banned_player_list.write().await;
     if let Some(entry) = banned_players.get_entry(profile) {
+        log::info!(
+            "Join blocked by ban: entry name='{}' uuid={} expires={:?}",
+            entry.name,
+            entry.uuid,
+            entry.expires
+        );
         let text = TextComponent::translate(
             "multiplayer.disconnect.banned.reason",
             [TextComponent::text(entry.reason.clone())],
         );
         return Some(match entry.expires {
-            Some(expires) => text.add_child(TextComponent::translate(
-                "multiplayer.disconnect.banned.expiration",
-                [TextComponent::text(
-                    expires.format(FORMAT_DESCRIPTION).unwrap(),
-                )],
-            )),
+            Some(expires) => {
+                let mut out = text.add_child(TextComponent::translate(
+                    "multiplayer.disconnect.banned.expiration",
+                    [TextComponent::text(
+                        expires.format(FORMAT_DESCRIPTION).unwrap(),
+                    )],
+                ));
+                let now = OffsetDateTime::now_utc();
+                let remaining = (expires.unix_timestamp() - now.unix_timestamp()).max(0);
+                let days = remaining / 86_400;
+                let hours = (remaining % 86_400) / 3_600;
+                let minutes = (remaining % 3_600) / 60;
+                out = out.add_child(TextComponent::text(format!(
+                    "\nUnban in {}d {}h {}m",
+                    days, hours, minutes
+                )));
+                out
+            }
             None => text,
         });
     }

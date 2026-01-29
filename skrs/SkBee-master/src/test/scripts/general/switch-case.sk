@@ -1,0 +1,196 @@
+function testSwitch(i: number) :: string:
+	return switch return {_i}:
+		case 1 -> "i am one"
+		case 2 -> "i am two"
+		default -> "i am default"
+
+function testSwitchAgain(i: number) :: string:
+	return switch return {_i}:
+		case 1:
+			return "i am one"
+		case 2:
+			return "i am two"
+		default:
+			return "i am default"
+
+function testItem(b: itemtype) :: string:
+	return switch return {_b}:
+		case stone, dirt, grass block -> "natural blocks"
+		case gravel, sand -> "mushy blocks"
+		default -> "default blocks"
+
+function testGetItem(b: block) :: itemtype:
+	return switch return {_b}:
+		case stone, dirt, gravel -> 1 of emerald named "Natural Gem"
+		case grass block, podzol, sand -> 1 of diamond named "Ground Gem"
+		default -> 1 of stick named "Useless Gem"
+
+test "SkBee - Switch and Case":
+	set {_i} to 2
+	switch {_i}:
+		case 1:
+			set {_test} to 1
+		case 2:
+			set {_test} to 2
+		case 3:
+			set {_test} to 3
+	assert {_test} = 2 with "Case 2 should have run"
+
+	set {_i} to diamond sword named "BOB"
+	switch type of {_i}:
+		case diamond:
+			assert {_i} is a diamond with "This should be failing"
+			set {_test} to 1
+		case iron ingot:
+			assert {_i} is an iron ingot with "This should be failing"
+			set {_test} to 2
+		case diamond sword:
+			assert {_i} is a diamond sword with "This should pass"
+			set {_test} to 3
+	assert {_test} = 3 with "The 3rd case should have run"
+
+	# Regression test - bug found by Fuse and another Skripter
+	# Comparators were backwards
+	set {_i} to diamond sword
+	switch {_i}:
+		case diamond sword named "BOB":
+			assert {_i} is a stick with "This shouldn't pass"
+			set {_test} to 1
+		case iron sword named "BOB":
+			assert {_i} is a stick with "This shouldn't pass"
+			set {_test} to 2
+		default:
+			assert {_i} is a diamond sword with "This should pass"
+			set {_test} to 3
+	assert {_test} = 3 with "The 3rd (default) case should have run"
+
+	parse:
+		switch event-block:
+			case plains:
+				set {_i} to 1
+			case 1:
+				set {_i} to 1
+	assert parse logs contains "Can't compare a block with a biome" with "The comparisons should have failed"
+	assert parse logs contains "Can't compare a block with an integer" with "The comparisons should have failed"
+
+	set {_i} to 5
+	switch {_i}:
+		case 1 -> assert {_i} = 1 to fail with "This should fail"
+		case 2 -> assert {_i} = 2 to fail with "This should fail"
+		case 5 -> assert {_i} = 5 with "This should pass"
+		default -> assert {_i} is not set to fail with "This should fail"
+
+	set {_i} to 5
+	switch {_i}: # This is a silly test (could use return) but I wanted to test effects
+		case 1 -> set {_test} to "1-%{_i}%"
+		case 2 -> set {_test} to "2-%{_i}%"
+		case 5 -> set {_test} to "5-%{_i}%"
+		default -> set {_test} to "default-%{_i}%"
+	assert {_test} = "5-5" with "The text should match"
+
+	set {_l} to location(1,1,1)
+	set {_data} to blockdata of block at {_l}
+	set block at {_l} to stone
+	set {_item} to testGetItem(block at {_l})
+	set block at {_l} to {_data}
+	assert {_item} = 1 of emerald named "Natural Gem" with "Should have returned the emerald"
+
+	# Test using normal and inline cases together
+	loop 5 times:
+		set {_i} to switch return loop-number:
+			case 1:
+				return "1"
+			case 2:
+				return "2"
+			case 3 -> "3"
+			case 4 -> "4"
+			default:
+				return "5"
+		assert {_i} = "%loop-number%" with "Switch should work with both normal and inline cases together"
+
+	# Test other elements in switch sections
+	parse:
+		set {_i} to switch return 5:
+			case 1:
+				return "1"
+			case 2:
+				return "2"
+			broadcast "MIDDLE"
+			case 3 -> "3"
+			case 4 -> "4"
+			default:
+				return "5"
+	assert parse logs contains "Only cases can be used in a switch section but found this:" with "Should have caught that broadcast"
+
+	parse:
+		set {_i} to switch return 5:
+			case 1 -> "one"
+			broadcast "MIDDLE"
+			case 2 -> "two"
+			case 3 -> "three"
+			case 4 -> "4"
+			default -> "5"
+	assert parse logs contains "Only cases can be used in a switch section but found this:" with "Should have caught that broadcast"
+
+	# Test Functions
+	assert testSwitch(1) = "i am one" with "This should be 'i am one'"
+	assert testSwitch(2) = "i am two" with "This should be 'i am two'"
+	assert testSwitch(3) = "i am default" with "This should be 'i am default'"
+	assert testSwitchAgain(1) = "i am one" with "This should be 'i am one'"
+	assert testSwitchAgain(2) = "i am two" with "This should be 'i am two'"
+	assert testSwitchAgain(3) = "i am default" with "This should be 'i am default'"
+	assert testItem(dirt) = "natural blocks" with "This should be 'natural blocks'"
+	assert testItem(stone) = "natural blocks" with "This should be 'natural blocks'"
+	assert testItem(grass block) = "natural blocks" with "This should be 'natural blocks'"
+	assert testItem(gravel) = "mushy blocks" with "This should be 'mushy blocks'"
+	assert testItem(sand) = "mushy blocks" with "This should be 'mushy blocks'"
+	assert testItem(pink wool) = "default blocks" with "This should be 'default blocks'"
+
+	# Test with tags
+	set {_logs::*} to oak log, birch log, spruce log, oak wood, stripped spruce wood, warped stem
+	loop {_logs::*}:
+		set {_l} to loop-value
+		set {_return} to switch return loop-value:
+			case minecraft block tag "minecraft:logs" -> "yay a log"
+			default -> "booo what are you: %{_l}%"
+		assert {_return} = "yay a log" with "Should have been tagged as a log"
+
+	# Test with event-values
+	set {test_spawn_switch_return_case_inline} to true
+	set {test_spawn_switch_return_case_normal} to true
+	set {test_spawn_switch_sec_case_normal} to true
+	set {test_spawn_switch_sec_case_inline} to true
+	spawn a sheep at event-location:
+		set {_e} to entity
+	assert {test_spawn_switch_return_case_inline} is "sheep: sheep" with "The switch return should have set this"
+	assert {test_spawn_switch_return_case_normal} is "sheep: sheep" with "The switch return should have set this"
+	assert {test_spawn_switch_sec_case_normal} is "sheep: sheep" with "The switch should have set this"
+	assert {test_spawn_switch_sec_case_inline} is "sheep: sheep" with "The switch should have set this"
+	delete {test_spawn_switch_return_case_inline}
+	delete {test_spawn_switch_return_case_normal}
+	delete {test_spawn_switch_sec_case_normal}
+	delete {test_spawn_switch_sec_case_inline}
+
+	delete entity within {_e}
+
+on spawn:
+	if {test_spawn_switch_return_case_inline} is true:
+		set {test_spawn_switch_return_case_inline} to switch return type of event-entity:
+			case a sheep -> "sheep: %type of event-entity%"
+			default -> "blah blah: %type of event-entity%"
+	if {test_spawn_switch_return_case_normal} is true:
+		set {test_spawn_switch_return_case_normal} to switch return type of event-entity:
+			case a sheep:
+				return "sheep: %type of event-entity%"
+			default:
+				return "blah blah: %type of event-entity%"
+	if {test_spawn_switch_sec_case_normal} is true:
+		switch type of event-entity:
+			case a sheep:
+				set {test_spawn_switch_sec_case_normal} to "sheep: sheep"
+			default:
+				set {test_spawn_switch_sec_case_normal} to "default"
+	if {test_spawn_switch_sec_case_inline} is true:
+		switch type of event-entity:
+			case a sheep -> set {test_spawn_switch_sec_case_inline} to "sheep: sheep"
+			default -> set {test_spawn_switch_sec_case_inline} to "default"

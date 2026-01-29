@@ -17,9 +17,10 @@ impl BannedPlayerList {
     #[must_use]
     pub fn get_entry(&mut self, profile: &GameProfile) -> Option<&BannedPlayerEntry> {
         self.remove_invalid_entries();
-        self.banned_players
-            .iter()
-            .find(|entry| entry.name == profile.name && entry.uuid == profile.id)
+        let name_lc = profile.name.to_ascii_lowercase();
+        self.banned_players.iter().find(|entry| {
+            entry.uuid == profile.id || entry.name.to_ascii_lowercase() == name_lc
+        })
     }
 
     fn remove_invalid_entries(&mut self) {

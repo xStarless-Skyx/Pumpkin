@@ -83,6 +83,7 @@ use crate::entity::{EntityBaseFuture, NbtFuture, TeleportFuture};
 use crate::net::{ClientPlatform, GameProfile};
 use crate::net::{DisconnectReason, PlayerConfig};
 use crate::plugin::player::player_change_world::PlayerChangeWorldEvent;
+use crate::plugin::player::player_death::PlayerDeathEvent;
 use crate::plugin::player::player_gamemode_change::PlayerGamemodeChangeEvent;
 use crate::plugin::player::player_teleport::PlayerTeleportEvent;
 use crate::server::Server;
@@ -1905,6 +1906,60 @@ impl Player {
     }
 
     async fn handle_killed(&self, death_msg: TextComponent) {
+        let server = self.world().server.upgrade().unwrap();
+        if let Some(player) = server.get_player_by_uuid(self.gameprofile.id).await {
+            send_cancellable! {{
+                server;
+                PlayerDeathEvent {
+                    player: player.clone(),
+                    death_message: death_msg.clone(),
+                    cancelled: false,
+                };
+
+                'after: {
+                    self.set_client_loaded(false);
+                    let block_pos = self.position().to_block_pos();
+
+                    let keep_inventory = {
+                        self.world()
+                            .level_info
+                            .read()
+                            .await
+                            .game_rules
+                            .keep_inventory
+                    };
+
+                    if !keep_inventory {
+                        for item in &self.inventory().main_inventory {
+                            let mut lock = item.lock().await;
+                            self.world()
+                                .drop_stack(
+                                    &block_pos,
+                                    mem::replace(&mut *lock, ItemStack::EMPTY.clone()),
+                                )
+                                .await;
+                        }
+                    }
+
+                    // Reset air supply & drowning ticks on death
+                    self.breath_manager.reset(self).await;
+
+                    self.client
+                        .send_packet_now(&CCombatDeath::new(
+                            self.entity_id().into(),
+                            &event.death_message,
+                        ))
+                        .await;
+                }
+
+                'cancelled: {
+                    self.set_client_loaded(true);
+                    self.set_health(1.0).await;
+                }
+            }}
+            return;
+        }
+
         self.set_client_loaded(false);
         let block_pos = self.position().to_block_pos();
 

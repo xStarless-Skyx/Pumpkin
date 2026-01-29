@@ -466,24 +466,47 @@ impl Server {
     }
 
     pub async fn shutdown(&self) {
+        log::info!("Shutdown: server shutdown begin");
         self.tasks.close();
-        log::debug!("Awaiting tasks for server");
+        log::info!("Shutdown: awaiting server tasks");
+        let tasks_start = std::time::Instant::now();
         self.tasks.wait().await;
-        log::debug!("Done awaiting tasks for server");
+        log::info!(
+            "Shutdown: server tasks done in {:?}",
+            tasks_start.elapsed()
+        );
 
-        log::info!("Starting worlds");
-        for world in self.worlds.read().await.iter() {
+        let worlds = self.worlds.read().await;
+        log::info!("Shutdown: starting worlds (count={})", worlds.len());
+        for (idx, world) in worlds.iter().enumerate() {
+            let world_start = std::time::Instant::now();
+            log::info!(
+                "Shutdown: world {} start ({:?})",
+                idx + 1,
+                world.dimension
+            );
             world.shutdown().await;
+            log::info!(
+                "Shutdown: world {} done in {:?}",
+                idx + 1,
+                world_start.elapsed()
+            );
         }
+        drop(worlds);
+
         let level_data = self.level_info.read().await;
         // then lets save the world info
-
+        let level_start = std::time::Instant::now();
         if let Err(err) = self
             .world_info_writer
             .write_world_info(&level_data, &self.basic_config.get_world_path())
         {
             log::error!("Failed to save level.dat: {err}");
         }
+        log::info!(
+            "Shutdown: level.dat write done in {:?}",
+            level_start.elapsed()
+        );
         log::info!("Completed worlds");
     }
 

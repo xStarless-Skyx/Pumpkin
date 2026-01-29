@@ -292,6 +292,10 @@ impl JavaClient {
                 player: player.clone(),
                 from: player.living_entity.entity.pos.load(),
                 to: position,
+                from_yaw: player.living_entity.entity.yaw.load(),
+                from_pitch: player.living_entity.entity.pitch.load(),
+                to_yaw: player.living_entity.entity.yaw.load(),
+                to_pitch: player.living_entity.entity.pitch.load(),
                 cancelled: false,
             };
 
@@ -402,6 +406,10 @@ impl JavaClient {
                 player.clone(),
                 player.living_entity.entity.pos.load(),
                 position,
+                player.living_entity.entity.yaw.load(),
+                player.living_entity.entity.pitch.load(),
+                wrap_degrees(packet.yaw) % 360.0,
+                wrap_degrees(packet.pitch),
             );
 
             'after: {
