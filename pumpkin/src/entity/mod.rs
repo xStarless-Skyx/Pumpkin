@@ -105,7 +105,22 @@ pub trait EntityBase: Send + Sync + NBTStorage {
     }
 
     fn init_data_tracker(&self) -> EntityBaseFuture<'_, ()> {
-        Box::pin(async {})
+        Box::pin(async move {
+            let entity = self.get_entity();
+
+            // If the internal age is negative, it's a baby
+            let is_baby = entity.age.load(Ordering::Relaxed) < 0;
+
+            if is_baby {
+                entity
+                    .send_meta_data(&[Metadata::new(
+                        TrackedData::DATA_BABY,
+                        MetaDataType::Boolean,
+                        true,
+                    )])
+                    .await;
+            }
+        })
     }
 
     // This method takes ownership of Arc<Self>, so the lifetime bounds are different.
@@ -186,6 +201,10 @@ pub trait EntityBase: Send + Sync + NBTStorage {
 
     /// Called when a player collides with a entity
     fn on_player_collision<'a>(&'a self, _player: &'a Arc<Player>) -> EntityBaseFuture<'a, ()> {
+        Box::pin(async {})
+    }
+
+    fn on_hit(&self, _hit: crate::entity::projectile::ProjectileHit) -> EntityBaseFuture<'_, ()> {
         Box::pin(async {})
     }
 
@@ -351,6 +370,7 @@ pub struct Entity {
     pub passengers: Mutex<Vec<Arc<dyn EntityBase>>>,
     /// The vehicle that entity is in
     pub vehicle: Mutex<Option<Arc<dyn EntityBase>>>,
+    /// The age of the entity in ticks. Negative values indicate a baby.
     pub age: AtomicI32,
 
     pub first_loaded_chunk_position: AtomicCell<Option<Vector3<i32>>>,
@@ -465,6 +485,12 @@ impl Entity {
     /// Called when the entity changes dimensions (e.g., through a nether portal).
     pub fn set_world(&self, world: Arc<World>) {
         self.world.store(world);
+    }
+
+    /// Sets the entity's age in ticks.
+    /// Negative values indicate that the entity is a baby.
+    pub fn set_age(&self, age: i32) {
+        self.age.store(age, Relaxed);
     }
 
     /// Sets a custom name for the entity, typically used with nametags
